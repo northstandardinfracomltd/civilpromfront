@@ -124,6 +124,35 @@
             .dest-grid { grid-template-columns: 1fr; }
             .srv-card { max-width: 100%; }
         }
+
+        /* Conteneur du logo */
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%; /* S'adapte à la hauteur de votre header */
+}
+
+.logo img {
+    /* Ajustez la hauteur selon vos besoins */
+    height: 50px; 
+    width: auto; /* Garde les proportions intactes */
+    display: block;
+    
+    /* Optionnel : transition douce si vous ajoutez un effet au survol */
+    transition: opacity 0.3s ease;
+}
+
+/* Effet au survol (optionnel) */
+.logo img:hover {
+    opacity: 0.8;
+}
+
+/* Responsive : ajustement pour mobile */
+@media (max-width: 768px) {
+    .logo img {
+        height: 35px; /* Logo légèrement plus petit sur mobile */
+    }
+}
     </style>
 </head>
 <body>
@@ -131,7 +160,11 @@
     <div id="diabrowser-lift"></div>
 
     <header>
-        <div class="logo">CIVILPROM</div>
+        <div class="logo">
+    <a href="/">
+        <img src="https://civilprom.s3.eu-north-1.amazonaws.com/CIVILPROM+2026+BLACK.svg" alt="CIVILPROM Logo">
+    </a>
+</div>
         <div class="nav-group">
             <a href="#services" class="nav-link">Services</a>
             <a href="#portfolio" class="nav-link">Portfolio</a>
