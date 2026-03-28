@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIVILPROM | Atopy & Creative Code</title>
+    <style>
+        /* EMPLACEMENT POUR VOTRE FONT PERSONNALISÉE */
+        /* @font-face { font-family: 'Civilprom'; src: url('font.woff2'); font-weight: 900; } */
+
+        :root {
+            --bg: #050505;
+            --text: #ffffff;
+            --accent: #f6ff00;
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER NAV (STRICT ONE LINE) --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 30px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; mix-blend-mode: difference;
+        }
+        .nav-group { display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; }
+        .nav-link { color: white; text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .btn-ui { 
+            background: white; color: black; border: none; padding: 10px 22px; 
+            border-radius: 40px; cursor: pointer; font-weight: 700; font-size: 0.75rem;
+            transition: 0.3s; white-space: nowrap;
+        }
+        .btn-ui:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- HERO --- */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .hero-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(0.6); }
+        .hero h1 { font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; text-align: center; }
+
+        /* --- SECTION SERVICES (DECK & KIOSQUE) --- */
+        .services-civilprom { padding: 140px 0; background: #080808; display: flex; justify-content: center; overflow: hidden; }
+        .services-wrapper { width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
+        
+        .deck-viewport { perspective: 2500px; width: 100%; height: 650px; display: flex; justify-content: center; margin-bottom: 30px; }
+        .deck-stack { position: relative; width: 90%; max-width: 500px; height: 550px; transform-style: preserve-3d; }
+
+        .srv-card {
+            position: absolute; inset: 0; background: #111; border: 1px solid #333; border-radius: 35px;
+            display: flex; flex-direction: column; overflow: hidden;
+            transition: var(--transition); opacity: 0; pointer-events: none;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+        }
+
+        .srv-card.active { opacity: 1; z-index: 30; transform: translateZ(0) translateY(0) rotateZ(0); pointer-events: auto; }
+        .srv-card.prev { opacity: 0.5; z-index: 20; transform: translateZ(-200px) translateY(50px) translateX(-15%) rotateZ(-8deg) rotateY(15deg); }
+        .srv-card.next { opacity: 0.5; z-index: 20; transform: translateZ(-200px) translateY(50px) translateX(15%) rotateZ(8deg) rotateY(-15deg); }
+
+        .card-txt { padding: 40px; flex: 0 0 45%; display: flex; flex-direction: column; justify-content: center; }
+        .card-txt h3 { font-size: 2.8rem; text-transform: uppercase; font-weight: 900; line-height: 0.8; margin-bottom: 12px; }
+        .card-txt p { font-size: 0.8rem; opacity: 0.4; letter-spacing: 2px; text-transform: uppercase; }
+        .card-img { flex: 1; background: #1a1a1a; background-size: cover; background-position: center; border-top: 1px solid #222; }
+
+        .kiosk-container { position: relative; width: 100%; max-width: 700px; height: 80px; }
+        .kiosk-scroll { display: flex; gap: 12px; padding: 15px 0; overflow-x: auto; scrollbar-width: none; }
+        .kiosk-scroll::-webkit-scrollbar { display: none; }
+        .kiosk-mask-left, .kiosk-mask-right { position: absolute; top: 0; width: 100px; height: 100%; z-index: 50; pointer-events: none; }
+        .kiosk-mask-left { left: 0; background: linear-gradient(to right, #080808 40%, transparent); }
+        .kiosk-mask-right { right: 0; background: linear-gradient(to left, #080808 40%, transparent); }
+
+        .srv-gelule {
+            padding: 12px 28px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px; color: white; white-space: nowrap; font-weight: 700; font-size: 0.75rem;
+            cursor: pointer; opacity: 0.2; transition: 0.4s;
+        }
+        .srv-gelule.active { opacity: 1; background: white; color: black; }
+
+        /* --- PORTFOLIO (NETFLIX) --- */
+        .portfolio-section { padding: 120px 5%; }
+        .port-track { display: flex; gap: 30px; overflow-x: auto; scrollbar-width: none; padding: 40px 0; }
+        .port-item { flex: 0 0 450px; transition: 0.4s; cursor: pointer; }
+        .port-visual { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 8px; margin-bottom: 20px; background-size: cover; }
+        .port-title { font-size: 1.5rem; text-transform: uppercase; font-weight: 800; }
+        .port-text { font-size: 0.9rem; opacity: 0.5; }
+
+        /* --- TEAM & DESTINATIONS --- */
+        .team-section { min-height: 140vh; position: relative; padding: 120px 5%; overflow: hidden; background: #050505; }
+        .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 100px; }
+        .dest-card { height: 70vh; border-radius: 20px; background-size: cover; background-position: center; position: relative; filter: grayscale(1); transition: 0.6s; }
+        .dest-card:hover { filter: grayscale(0); }
+        .dest-card h4 { position: absolute; bottom: 30px; left: 30px; font-size: 2.5rem; font-weight: 900; }
+
+        .member-cell {
+            position: absolute; background: white; color: black; padding: 20px 35px;
+            border-radius: 100px; z-index: 100; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: floatMember 10s ease-in-out infinite alternate; pointer-events: none;
+        }
+        .mem-name { font-size: 1.1rem; font-weight: 900; display: block; line-height: 1.1; margin-bottom: 4px; }
+        .mem-role { font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; display: block; }
+        @keyframes floatMember { from { transform: translate(0,0) rotate(-2deg); } to { transform: translate(30px, -50px) rotate(2deg); } }
+
+        /* --- DIABROWSER LIFT --- */
+        #diabrowser-lift {
+            position: fixed; bottom: -400px; left: 0; width: 100%; height: 500px;
+            background: linear-gradient(0deg, #f6ff00 0%, #ff8a00 20%, #ff008a 50%, #0057ff 80%, transparent 100%);
+            filter: blur(120px); opacity: 0; z-index: -1; pointer-events: none;
+            transition: transform 0.2s ease-out, opacity 0.6s;
+        }
+
+        /* --- FOOTER & CONTACT --- */
+        .contact-section { padding: 150px 5%; }
+        footer { padding: 100px 5% 400px; text-align: center; border-top: 1px solid #111; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
+
+        @media (max-width: 900px) {
+            .nav-group { display: none; }
+            .dest-grid { grid-template-columns: 1fr; }
+            .srv-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="diabrowser-lift"></div>
+
+    <header>
+        <div class="logo">CIVILPROM</div>
+        <div class="nav-group">
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#portfolio" class="nav-link">Portfolio</a>
+            <button class="btn-ui" onclick="document.getElementById('contact').scrollIntoView()">Contact</button>
+            <button class="btn-ui" id="langBtn" onclick="toggleLang()">Visiter Civilprom Français</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline><source src="hero_civilprom.mp4" type="video/mp4"></video>
+            <h1 data-en="CIVILPROM" data-fr="CIVILPROM">CIVILPROM</h1>
+        </section>
+
+        <section class="services-civilprom" id="services">
+            <div class="services-wrapper">
+                <div class="deck-viewport"><div class="deck-stack" id="srvStack"></div></div>
+                <div class="kiosk-container">
+                    <div class="kiosk-mask-left"></div><div class="kiosk-mask-right"></div>
+                    <div class="kiosk-scroll" id="srvNav"></div>
+                </div>
+            </div>
+        </section>
+
+<section class="portfolio-civilprom" id="portfolio">
+    <div class="portfolio-wrapper">
+        
+        <div class="portfolio-header">
+            <h2 data-en="SELECTED WORKS" data-fr="PROJETS SÉLECTIONNÉS">SELECTED WORKS</h2>
+            <p class="portfolio-intro" data-en="Our projects are atypical explorations. We don't follow trends, we create them through high-performance graphics and code." data-fr="Nos projets sont des explorations atypiques. Nous ne suivons pas les tendances, nous les créons via le graphisme et le code haute performance.">
+                Our projects are atypical explorations. We don't follow trends, we create them through high-performance graphics and code.
+            </p>
+        </div>
+
+        <div class="portfolio-viewport">
+            <div class="portfolio-track" id="portTrack">
+                </div>
+        </div>
+
+        <div class="portfolio-nav-container">
+            <div class="portfolio-nav-inner">
+                <button class="port-btn" onclick="portMove(-1)" data-en="PREVIOUS" data-fr="PRÉCÉDENT">PREVIOUS</button>
+                <button class="port-btn" onclick="portMove(1)" data-en="NEXT" data-fr="SUIVANT">NEXT</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .portfolio-civilprom {
+        background: #050505;
+        padding: 100px 0;
+        overflow: hidden;
+    }
+
+    .portfolio-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .portfolio-header {
+        padding: 0 5%;
+        margin-bottom: 50px;
+    }
+
+    .portfolio-header h2 {
+        font-size: 4rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 0.9;
+        margin-bottom: 20px;
+    }
+
+    .portfolio-intro {
+        max-width: 600px;
+        opacity: 0.5;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* --- VIEWPORT & TRACK --- */
+    .portfolio-viewport {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .portfolio-track {
+        display: flex;
+        gap: 25px;
+        padding: 0 5%;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .portfolio-track::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+
+    /* --- ITEM DESIGN --- */
+    .port-item {
+        flex: 0 0 450px; /* Largeur fixe type Netflix */
+        padding: 15px;
+        border: 1px solid transparent; /* Prévu pour le hover */
+        border-radius: 20px;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* HOVER BORDER EFFECT */
+    .port-item:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .port-img-box {
+        width: 100%;
+        aspect-ratio: 16/10;
+        background: #1a1a1a; /* Full background gris */
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .port-img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.8s ease;
+    }
+
+    .port-item:hover .port-img {
+        transform: scale(1.05);
+    }
+
+    .port-date {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: var(--accent, #f6ff00);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+    }
+
+    .port-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+
+    .port-dummy {
+        font-size: 0.9rem;
+        opacity: 0.4;
+        line-height: 1.4;
+        margin-top: auto;
+    }
+
+    /* --- NAV BUTTONS (700PX) --- */
+    .portfolio-nav-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .portfolio-nav-inner {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        gap: 15px;
+    }
+
+    .port-btn {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 18px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .port-btn:hover {
+        background: white;
+        color: black;
+        border-color: white;
+    }
+
+    @media (max-width: 768px) {
+        .port-item { flex: 0 0 300px; }
+        .portfolio-nav-inner { padding: 0 5%; }
+    }
+</style>
+
+<script>
+    const portProjects = [
+        { date: "2026", title: "Alpha Core", desc: "Identity design for high-performance computing labs.", img: "p1.jpg" },
+        { date: "2025", title: "Beta Flow", desc: "Seamless UI architecture for modern web systems.", img: "p2.jpg" },
+        { date: "2026", title: "Gamma Edit", desc: "Bespoke typography and editorial layout projects.", img: "p3.jpg" },
+        { date: "2025", title: "Delta Lab", desc: "Experimental SVG solutions for brand territories.", img: "p4.jpg" },
+        { date: "2024", title: "Epsilon", desc: "Global strategy and immersive brand storytelling.", img: "p5.jpg" },
+        { date: "2026", title: "Zeta Sport", desc: "High-octane visual identity for sports institutions.", img: "p6.jpg" },
+        { date: "2025", title: "Theta Unit", desc: "Institutional graphics for international industries.", img: "p7.jpg" },
+        { date: "2024", title: "Iota Space", desc: "Next-gen web experiences built with pure code.", img: "p8.jpg" },
+        { date: "2026", title: "Kappa Cult", desc: "Cultural branding and artistic book publishing.", img: "p9.jpg" }
+    ];
+
+    function renderPortfolio() {
+        const track = document.getElementById('portTrack');
+        portProjects.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'port-item';
+            div.innerHTML = `
+                <div class="port-img-box">
+                    <div class="port-img" style="background-image: url('${p.img}')"></div>
+                </div>
+                <span class="port-date">${p.date}</span>
+                <h3 class="port-title">${p.title}</h3>
+                <p class="port-dummy">${p.desc}</p>
+            `;
+            track.appendChild(div);
+        });
+    }
+
+    function portMove(dir) {
+        const track = document.getElementById('portTrack');
+        const scrollStep = 475; // Card width (450) + gap (25)
+        track.scrollBy({
+            left: dir * scrollStep,
+            behavior: 'smooth'
+        });
+    }
+
+    renderPortfolio();
+</script>
+
+
+<section class="civil-team-canvas" id="team">
+    <div class="civil-team-intro">
+        <h2 data-en="NETWORK & TALENTS" data-fr="RÉSEAU & TALENTS">NETWORK & TALENTS</h2>
+    </div>
+
+    <div class="civil-canvas-wrapper">
+        <div class="civil-studios-grid">
+            <div class="civil-studio-card">
+                <div class="studio-img-container">
+                    <div class="studio-img" style="background-image: url('porto.jpg');"></div>
+                    <div class="member-cloud" id="cloud-0"></div>
+                </div>
+                <div class="studio-meta"><h3>PORTO</h3><p>Creative hub for high-performance digital architecture.</p></div>
+            </div>
+            <div class="civil-studio-card">
+                <div class="studio-img-container">
+                    <div class="studio-img" style="background-image: url('calp.jpg');"></div>
+                    <div class="member-cloud" id="cloud-1"></div>
+                </div>
+                <div class="studio-meta"><h3>CALP</h3><p>Strategic center focused on Mediterranean design.</p></div>
+            </div>
+            <div class="civil-studio-card">
+                <div class="studio-img-container">
+                    <div class="studio-img" style="background-image: url('anglet.jpg');"></div>
+                    <div class="member-cloud" id="cloud-2"></div>
+                </div>
+                <div class="studio-meta"><h3>ANGLET</h3><p>Artistic editions and publishing studio.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .civil-team-canvas { background: #050505; padding: 120px 0; position: relative; overflow: hidden; }
+    .civil-team-intro h2 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; text-align: center; color: #ffffff; margin-bottom: 80px; text-transform: uppercase; }
+    .civil-canvas-wrapper { width: 90%; max-width: 1400px; margin: 0 auto; }
+    .civil-studios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .civil-studio-card { background: #111; border: 1px solid #222; border-radius: 24px; padding: 25px; position: relative; }
+    .studio-img-container { position: relative; width: 100%; height: 480px; margin-bottom: 25px; border-radius: 16px; overflow: visible; }
+    .studio-img { width: 100%; height: 100%; background-size: cover; background-position: center; border-radius: 16px; filter: grayscale(1); transition: filter 0.6s ease; }
+    .civil-studio-card:hover .studio-img { filter: grayscale(0); }
+    .studio-meta h3 { color: #fff; font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+    .studio-meta p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+
+    /* NUAGE DE CELLULES */
+    .member-cloud { position: absolute; top: -10px; left: -15px; width: 100%; height: 350px; pointer-events: none; z-index: 100; }
+
+    /* CONTENEUR DE FLOTTEMENT (Gère l'animation CSS) */
+    .member-floater {
+        position: absolute;
+        pointer-events: none;
+        will-change: transform;
+        animation: organicFloat 12s ease-in-out infinite alternate;
+    }
+
+
+.xxx {
+display: none !important;
+    }
+    /* LA GÉLULE (Gère l'évitement JS) */
+    .member-tag {
+        position: relative;
+        background: #ffffff;
+        color: #000000;
+        padding: 10px 22px;
+        border-radius: 100px;
+        pointer-events: auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.15s ease-out; 
+        white-space: nowrap;
+    }
+
+    @keyframes organicFloat {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        100% { transform: translate(10px, -15px) rotate(3deg); }
+    }
+
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; animation: pulseLive 2s infinite; }
+    @keyframes pulseLive { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.3); } }
+    .tag-content { display: flex; flex-direction: column; }
+    .tag-name { font-size: 0.95rem; font-weight: 900; line-height: 1; }
+    .tag-role { font-size: 0.6rem; text-transform: uppercase; opacity: 0.5; font-weight: 700; margin-top: 2px; }
+
+    @media (max-width: 900px) { .civil-studios-grid { grid-template-columns: 1fr; } .member-floater { animation: none; position: relative !important; top: 0 !important; left: 0 !important; margin-bottom: 10px; } }
+</style>
+
+<script>
+    const teamByStudio = [
+        [{ n: "Ronan Roesch", r: "Artist" }, { n: "AAA BBB", r: "Operations" }, { n: "AAA BBB", r: "Copywriter" }],
+        [{ n: "AAA BBB", r: "Senior AD" }, { n: "AAA BBB", r: "Graphiste" }, { n: "CCC DDD", r: "Motion" }, { n: "EEE FFF", r: "UX Res." }],
+        [{ n: "AAA BBB", r: "Front Dev" }, { n: "GGG HHH", r: "Strategist" }]
+    ];
+
+    function initCloudTeam() {
+        teamByStudio.forEach((members, studioIndex) => {
+            const cloud = document.getElementById(`cloud-${studioIndex}`);
+            
+            members.forEach((m, i) => {
+                // 1. Créer le floater (le parent qui bouge en CSS)
+                const floater = document.createElement('div');
+                floater.className = 'member-floater';
+                
+                const topBase = i * 45 + (Math.random() * 15); 
+                const leftBase = (i % 2 === 0 ? 0 : 25) + (Math.random() * 25);
+                
+                floater.style.top = `${topBase}px`;
+                floater.style.left = `${leftBase}px`;
+                floater.style.animationDelay = `${i * 1.5}s`;
+
+                // 2. Créer la gélule (l'enfant qui évite la souris)
+                const tag = document.createElement('div');
+                tag.className = 'member-tag';
+                const baseRot = (Math.random() * 14) - 7;
+                tag.style.transform = `rotate(${baseRot}deg)`;
+
+                tag.innerHTML = `
+                    <div class="status-dot"></div>
+                    <div class="tag-content"><span class="tag-name">${m.n}</span><span class="tag-role">${m.r}</span></div>
+                `;
+
+                // 3. Logique d'évitement
+                document.addEventListener('mousemove', (e) => {
+                    const rect = tag.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+
+                    const diffX = e.clientX - centerX;
+                    const diffY = e.clientY - centerY;
+                    const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+
+                    const radius = 150; 
+
+                    if (distance < radius) {
+                        const ratio = (radius - distance) / radius;
+                        const moveX = (diffX / distance) * ratio * -60;
+                        const moveY = (diffY / distance) * ratio * -60;
+                        tag.style.transform = `rotate(${baseRot}deg) translate(${moveX}px, ${moveY}px) scale(1.1)`;
+                        tag.parentElement.style.zIndex = "200";
+                    } else {
+                        tag.style.transform = `rotate(${baseRot}deg) translate(0, 0) scale(1)`;
+                        tag.parentElement.style.zIndex = "100";
+                    }
+                });
+
+                floater.appendChild(tag);
+                cloud.appendChild(floater);
+            });
+        });
+    }
+    window.addEventListener('load', initCloudTeam);
+</script>
+
+
+        <section class="team-section xxx" id="team">
+            <div id="bubbles-container"></div>
+            <div class="dest-grid">
+                <div class="dest-card" style="background-image:url('porto.jpg')"><h4>PORTO</h4></div>
+                <div class="dest-card" style="background-image:url('calp.jpg')"><h4>CALP</h4></div>
+                <div class="dest-card" style="background-image:url('anglet.jpg')"><h4>ANGLET</h4></div>
+            </div>
+        </section>
+
+<section class="civil-contact-section" id="contact">
+    <div class="civil-contact-container">
+        
+        <div class="contact-header">
+            <h2 data-en="GET IN TOUCH" data-fr="CONTACTEZ-NOUS">GET IN TOUCH</h2>
+            <p data-en="Available for atypical projects and global collaborations." data-fr="Disponible pour des projets atypiques et des collaborations mondiales.">Available for atypical projects and global collaborations.</p>
+        </div>
+
+        <div class="contact-grid">
+            
+            <div class="contact-card form-card">
+                <form id="civilContactForm">
+                    <div class="input-group">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label for="name" data-en="Name" data-fr="Nom">Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" required placeholder=" ">
+                        <label for="email" data-en="Email" data-fr="Email">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="message" rows="4" required placeholder=" "></textarea>
+                        <label for="message" data-en="Message" data-fr="Message">Message</label>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span data-en="SEND REQUEST" data-fr="ENVOYER LA DEMANDE">SEND REQUEST</span>
+                        <div class="btn-line"></div>
+                    </button>
+                </form>
+            </div>
+
+            <a href="tel:+33000000000" class="contact-card info-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <h3 data-en="Phone" data-fr="Téléphone">Phone</h3>
+                <p>+33 (0) 6 00 00 00 00</p>
+                <span class="card-action" data-en="Call now" data-fr="Appeler">Call now</span>
+            </a>
+
+            <a href="https://wa.me/33000000000" target="_blank" class="contact-card info-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-13.4 8.38 8.38 0 0 1 3.8.9L21 3.5Z"></path></svg>
+                </div>
+                <h3 data-en="WhatsApp" data-fr="WhatsApp">WhatsApp</h3>
+                <p data-en="Instant Message" data-fr="Message Instantané">Instant Message</p>
+                <span class="card-action" data-en="Start Chat" data-fr="Discuter">Start Chat</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .civil-contact-section {
+        background: #050505;
+        padding: 120px 5%;
+        border-top: 1px solid #111;
+    }
+
+    .civil-contact-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .contact-header {
+        margin-bottom: 80px;
+    }
+
+    .contact-header h2 {
+        font-size: clamp(3rem, 10vw, 6rem);
+        font-weight: 900;
+        line-height: 0.8;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .contact-header p {
+        font-size: 1.1rem;
+        opacity: 0.5;
+        max-width: 500px;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 30px;
+    }
+
+    .contact-card {
+        background: #0d0d0d;
+        border: 1px solid #1a1a1a;
+        border-radius: 24px;
+        padding: 50px;
+        text-decoration: none;
+        color: white;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-card:hover {
+        background: #111;
+        border-color: #333;
+        transform: translateY(-10px);
+    }
+
+    /* --- FORM STYLING --- */
+    .input-group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .input-group input, .input-group textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #333;
+        color: white;
+        padding: 10px 0;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .input-group label {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        opacity: 0.3;
+        pointer-events: none;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+
+    .input-group input:focus ~ label, 
+    .input-group input:not(:placeholder-shown) ~ label,
+    .input-group textarea:focus ~ label,
+    .input-group textarea:not(:placeholder-shown) ~ label {
+        top: -20px;
+        font-size: 0.6rem;
+        color: var(--accent, #f6ff00);
+        opacity: 1;
+    }
+
+    .input-group input:focus, .input-group textarea:focus {
+        border-bottom-color: white;
+    }
+
+    .submit-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0;
+        font-weight: 900;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: fit-content;
+    }
+
+    .btn-line {
+        width: 40px;
+        height: 2px;
+        background: var(--accent, #f6ff00);
+        transition: width 0.3s;
+    }
+
+    .submit-btn:hover .btn-line {
+        width: 100%;
+    }
+
+    /* --- INFO CARDS --- */
+    .card-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 30px;
+        color: var(--accent, #f6ff00);
+    }
+
+    .info-card h3 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .info-card p {
+        opacity: 0.5;
+        margin-bottom: auto;
+    }
+
+    .card-action {
+        margin-top: 40px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 1px solid transparent;
+        width: fit-content;
+        transition: border-color 0.3s;
+    }
+
+    .info-card:hover .card-action {
+        border-bottom-color: var(--accent, #f6ff00);
+    }
+
+    @media (max-width: 1024px) {
+        .contact-grid { grid-template-columns: 1fr; }
+        .contact-card { padding: 40px; }
+    }
+</style>
+    </main>
+
+    <footer>
+        <p>© 2026 CIVILPROM — BEYOND GRAPHICS — BUILT WITH PURE CODE</p>
+    </footer>
+
+    <script>
+        const servicesData = ["Logo", "Police", "Illustrations", "Charte graphique", "Kit de marque", "Directives de marque", "Couleurs", "Histoire et culture de marque", "Interfaces UI/UX", "Site internet vitrine", "Expériences immersives web", "Ouvrages", "Stratégie de marque"];
+        const members = [{n:"Ronan Roesch", r:"Éditions Artistiques"}, {n:"AAA BBB", r:"Directeur Opérations"}, {n:"AAA BBB", r:"Rédactrice"}, {n:"AAA BBB", r:"Senior AD"}, {n:"AAA BBB", r:"Graphiste"}, {n:"AAA BBB", r:"Front Dev"}];
+
+        const stack = document.getElementById('srvStack');
+        const nav = document.getElementById('srvNav');
+        let currentIdx = 0;
+
+        function init() {
+            // Cards & Kiosk
+            servicesData.forEach((s, i) => {
+                const c = document.createElement('div');
+                c.className = 'srv-card';
+                c.innerHTML = `<div class="card-txt"><h3>${s}</h3><p>Civilprom Studio</p></div><div class="card-img" style="background-image:url('img-${i}.jpg')"></div>`;
+                stack.appendChild(c);
+            });
+
+            [...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
+                const g = document.createElement('div');
+                g.className = 'srv-gelule';
+                g.innerText = s.toUpperCase();
+                g.onclick = () => { currentIdx = i % servicesData.length; updateUI(); };
+                nav.appendChild(g);
+            });
+
+            // Team Bubbles
+            const bCont = document.getElementById('bubbles-container');
+            members.forEach((m, i) => {
+                const b = document.createElement('div');
+                b.className = 'member-cell';
+                b.innerHTML = `<span class="mem-name">${m.n}</span><span class="mem-role">${m.r}</span>`;
+                b.style.top = (20 + Math.random() * 50) + "%";
+                b.style.left = (10 + Math.random() * 70) + "%";
+                b.style.animationDelay = (i * 1.5) + "s";
+                bCont.appendChild(b);
+            });
+
+            setTimeout(() => { nav.scrollLeft = nav.scrollWidth / 3; updateUI(); }, 100);
+        }
+
+        function updateUI() {
+            const cards = document.querySelectorAll('.srv-card');
+            const gels = document.querySelectorAll('.srv-gelule');
+            const total = servicesData.length;
+            cards.forEach((c, i) => {
+                c.className = 'srv-card';
+                if(i === currentIdx) c.classList.add('active');
+                else if(i === (currentIdx - 1 + total) % total) c.classList.add('prev');
+                else if(i === (currentIdx + 1) % total) c.classList.add('next');
+            });
+            gels.forEach((g, i) => {
+                const isMe = (i % total) === currentIdx;
+                g.classList.toggle('active', isMe);
+                if(isMe && i >= total && i < total * 2) {
+                    const off = g.offsetLeft - (nav.offsetWidth / 2) + (g.offsetWidth / 2);
+                    nav.scrollTo({ left: off, behavior: 'smooth' });
+                }
+            });
+        }
+
+        nav.addEventListener('scroll', () => {
+            const w = nav.scrollWidth / 3;
+            if(nav.scrollLeft < w / 2) nav.scrollLeft += w;
+            if(nav.scrollLeft > w * 2) nav.scrollLeft -= w;
+        });
+
+        window.addEventListener('scroll', () => {
+            const lift = document.getElementById('diabrowser-lift');
+            const scrolled = window.innerHeight + window.pageYOffset;
+            const total = document.documentElement.scrollHeight;
+            if (scrolled > total - 150) {
+                const delta = scrolled - (total - 150);
+                lift.style.opacity = "0.8";
+                lift.style.transform = `translateY(-${Math.min(delta * 1.8, 380)}px)`;
+            } else { lift.style.opacity = "0"; lift.style.transform = `translateY(0)`; }
+        });
+
+        function toggleLang() {
+            const btn = document.getElementById('langBtn');
+            btn.innerText = btn.innerText.includes('Français') ? 'Visit Civilprom English' : 'Visiter Civilprom Français';
+        }
+
+        init();
+    </script>
+</body>
+</html>
