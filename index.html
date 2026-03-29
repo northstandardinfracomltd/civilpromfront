@@ -15,6 +15,24 @@
             --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+            @font-face {
+      font-family: 'CivilpromFont1';
+          font-weight: 100 !important;
+      src: url('https://civilprom.s3.eu-north-1.amazonaws.com/Civilprom1.otf') format('opentype');
+    }
+
+        @font-face {
+      font-family: 'CivilpromFont2';
+          font-weight: 100 !important;
+      src: url('dddhttps://civilprom.s3.eu-north-1.amazonaws.com/Civilprom2.otfddd') format('opentype');
+    }
+
+            @font-face {
+      font-family: 'CivilpromFont3';
+          font-weight: 100 !important;
+      src: url('https://civilprom.s3.eu-north-1.amazonaws.com/Civilprom3.otf') format('opentype');
+    }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { 
@@ -47,7 +65,7 @@
         .hero h1 { font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; text-align: center; }
 
         /* --- SECTION SERVICES (DECK & KIOSQUE) --- */
-        .services-civilprom { padding: 140px 0; background: #080808; display: flex; justify-content: center; overflow: hidden; }
+        .services-civilprom { padding: 140px 0; background: radial-gradient(circle at 50% -20%, #0d0d1d 0%, #573cff 80%) !important; display: flex; justify-content: center; overflow: hidden; }
         .services-wrapper { width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
         
         .deck-viewport { perspective: 2500px; width: 100%; height: 650px; display: flex; justify-content: center; margin-bottom: 30px; }
@@ -166,8 +184,6 @@
     </a>
 </div>
         <div class="nav-group">
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#portfolio" class="nav-link">Portfolio</a>
             <button class="btn-ui" onclick="document.getElementById('contact').scrollIntoView()">Contact</button>
             <button class="btn-ui" id="langBtn" onclick="toggleLang()">Visiter Civilprom Français</button>
         </div>
@@ -185,7 +201,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #fff;
+        background: radial-gradient(#281698, #020248) !important;
         overflow: hidden;
         z-index: 1;
     }
@@ -245,21 +261,20 @@
         pointer-events: auto; 
     }
     .main-title { 
-        font-family: 'Inter', sans-serif;
         font-size: clamp(3rem, 7vw, 5.5rem); 
         margin: 0; 
         letter-spacing: -4px; 
         color: #000; 
         line-height: 1; 
+        font-family: 'CivilpromFont3', sans-serif; font-weight: 100; 
     }
     .sub-title { 
-        font-family: 'Inter', sans-serif;
         font-size: 0.85rem; 
         text-transform: uppercase; 
         letter-spacing: 2px; 
         color: #444; 
         margin: 15px 0 30px; 
-        font-weight: 600; 
+        font-family: 'CivilpromFont1', sans-serif; font-weight: 100; 
     }
     .btn-mixboard { 
         background: #7c3aed; 
@@ -286,7 +301,11 @@
     }
     @keyframes fadeInMix { to { opacity: 1; } }
 
-    .mix-card { background: #fff; padding: 8px; border-radius: 18px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+    .mix-card { background: #ffffff0f;
+    border: 1px solid #ffffff17;
+    padding: 5px;
+    box-shadow: inset 0 1px 1px #fff3, 0 1px 2px #08080833, 0 4px 4px #08080814, 0 7px 0 -12px #077ac7, inset 0 6px 12px #ffffff1f;
+    border-radius: 18px; }
     .mix-card img { border-radius: 12px; display: block; }
     .mix-raw img { display: block; filter: drop-shadow(0 12px 12px rgba(0,0,0,0.1)); }
     .mix-label { font-family: 'Reenie Beanie', cursive; font-size: 1.8rem; color: #000; margin-top: 5px; }
@@ -351,6 +370,10 @@
 </section>
 
         <section class="services-civilprom" id="services">
+
+            <h2 class="titleofsection"  data-en="Artistic Services" data-fr="Services Artistiques">Artistic Services</h2>
+
+
             <div class="services-wrapper">
                 <div class="deck-viewport"><div class="deck-stack" id="srvStack"></div></div>
                 <div class="kiosk-container">
@@ -387,7 +410,7 @@
 
 <style>
     .portfolio-civilprom {
-        background: #050505;
+        background: #631fac;
         padding: 100px 0;
         overflow: hidden;
     }
@@ -617,7 +640,7 @@
 </section>
 
 <style>
-    .civil-team-canvas { background: #050505; padding: 120px 0; position: relative; overflow: hidden; }
+    .civil-team-canvas { background: #a8f277; padding: 120px 0; position: relative; overflow: hidden; }
     .civil-team-intro h2 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; text-align: center; color: #ffffff; margin-bottom: 80px; text-transform: uppercase; }
     .civil-canvas-wrapper { width: 90%; max-width: 1400px; margin: 0 auto; }
     .civil-studios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
