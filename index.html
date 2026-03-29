@@ -101,7 +101,12 @@ position: absolute;
         .srv-card.next { opacity: 0.5; z-index: 20; transform: translateZ(-200px) translateY(50px) translateX(15%) rotateZ(8deg) rotateY(-15deg); }
 
         .card-txt { padding: 40px; flex: 0 0 45%; display: flex; flex-direction: column; justify-content: center; }
-        .card-txt h3 { font-size: 2.8rem;  font-weight: 900; line-height: 0.8; margin-bottom: 12px; }
+        .card-txt h3 {     font-size: 42px;
+    letter-spacing: 0px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 15px;
+    font-family: 'CivilpromFont3', sans-serif;}
         .card-txt p { font-size: 0.8rem; opacity: 0.4; letter-spacing: 2px; }
         .card-img { flex: 1; background: #1a1a1a; background-size: cover; background-position: center; border-top: 1px solid #222; }
 
@@ -673,21 +678,21 @@ font-size: 18px;
         <div class="civil-studios-grid">
             <div class="civil-studio-card">
                 <div class="studio-img-container">
-                    <div class="studio-img" style="background-image: url('porto.jpg');"></div>
+                    <div class="studio-img" style="background-image: url('https://civilprom.s3.eu-north-1.amazonaws.com/dummy.png');"></div>
                     <div class="member-cloud" id="cloud-0"></div>
                 </div>
                 <div class="studio-meta"><h3>PORTO</h3><p>Creative hub for high-performance digital architecture.</p></div>
             </div>
             <div class="civil-studio-card">
                 <div class="studio-img-container">
-                    <div class="studio-img" style="background-image: url('calp.jpg');"></div>
+                    <div class="studio-img" style="background-image: url('https://civilprom.s3.eu-north-1.amazonaws.com/dummy.png');"></div>
                     <div class="member-cloud" id="cloud-1"></div>
                 </div>
                 <div class="studio-meta"><h3>CALP</h3><p>Strategic center focused on Mediterranean design.</p></div>
             </div>
             <div class="civil-studio-card">
                 <div class="studio-img-container">
-                    <div class="studio-img" style="background-image: url('anglet.jpg');"></div>
+                    <div class="studio-img" style="background-image: url('https://civilprom.s3.eu-north-1.amazonaws.com/dummy.png');"></div>
                     <div class="member-cloud" id="cloud-2"></div>
                 </div>
                 <div class="studio-meta"><h3>ANGLET</h3><p>Artistic editions and publishing studio.</p></div>
@@ -1069,35 +1074,117 @@ background: #000000;
     </main>
 
     <script>
-        const servicesData = ["Logo", "Police", "Illustrations", "Charte graphique", "Kit de marque", "Directives de marque", "Couleurs", "Histoire et culture de marque", "Interfaces UI/UX", "Site internet vitrine", "Expériences immersives web", "Ouvrages", "Stratégie de marque"];
+
+        const servicesData = [
+    { 
+        title: "Logo", 
+        desc: "Identité visuelle pure et marquante.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-0.png" 
+    },
+    { 
+        title: "Police", 
+        desc: "Typographie sur-mesure et exclusive.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-1.png" 
+    },
+    { 
+        title: "Illustrations", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Charte Graphique", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Kit de Marque", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Directives de marque", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Couleurs", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Culture de marque", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "UI/UX", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Site internet", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Ouvrages", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+        { 
+        title: "Stratégie de marque", 
+        desc: "Narrations graphiques atypiques.", 
+        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
+    },
+];
+
         const members = [{n:"Ronan Roesch", r:"Éditions Artistiques"}, {n:"AAA BBB", r:"Directeur Opérations"}, {n:"AAA BBB", r:"Rédactrice"}, {n:"AAA BBB", r:"Senior AD"}, {n:"AAA BBB", r:"Graphiste"}, {n:"AAA BBB", r:"Front Dev"}];
 
         const stack = document.getElementById('srvStack');
         const nav = document.getElementById('srvNav');
         let currentIdx = 0;
 
-        function init() {
-            // Cards & Kiosk
-            servicesData.forEach((s, i) => {
-                const c = document.createElement('div');
-                c.className = 'srv-card';
-                c.innerHTML = `<div class="card-txt"><h3>${s}</h3><p>Civilprom Studio</p></div><div class="card-img" style="background-image:url('img-${i}.jpg')"></div>`;
-                stack.appendChild(c);
-            });
 
-[...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
-    const g = document.createElement('div');
-    g.className = 'srv-gelule';
-    
-    // On utilise directement "s" sans transformation
-    g.innerText = s; 
-    
-    g.onclick = () => { 
-        currentIdx = i % servicesData.length; 
+
+
+function init() {
+    // 1. Génération des Cartes (Stack)
+    servicesData.forEach((s, i) => {
+        const c = document.createElement('div');
+        c.className = 'srv-card';
+        
+        // On utilise s.title, s.desc et s.img au lieu de variables fixes
+        c.innerHTML = `
+            <div class="card-txt">
+                <h3>${s.title}</h3>
+                <p>${s.desc}</p>
+            </div>
+            <div class="card-img" style="background-image:url('${s.img}')"></div>
+        `;
+        stack.appendChild(c);
+    });
+
+    // 2. Génération du Kiosque (Gélules)
+    // On triple le tableau pour l'effet infini
+    [...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
+        const g = document.createElement('div');
+        g.className = 'srv-gelule';
+        
+        // On affiche le titre de l'objet sans forcer l'Uppercase
+        g.innerText = s.title; 
+        
+        g.onclick = () => { 
+            currentIdx = i % servicesData.length; 
+            updateUI(); 
+        };
+        nav.appendChild(g);
+    });
+
+    setTimeout(() => { 
+        nav.scrollLeft = nav.scrollWidth / 3; 
         updateUI(); 
-    };
-    nav.appendChild(g);
-});
+    }, 100);
+}
 
             // Team Bubbles
             const bCont = document.getElementById('bubbles-container');
