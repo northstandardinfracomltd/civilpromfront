@@ -53,11 +53,21 @@
         .nav-link { color: white; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; }
         
         .btn-ui { 
-            background: white; color: black; border: none; padding: 10px 22px; 
-            border-radius: 40px; cursor: pointer; font-weight: 700; font-size: 0.75rem;
-            transition: 0.3s; white-space: nowrap;
+    background: #ffffff17;
+    color: #ffffff;
+    border: 1px solid #ffffff1c;
+    padding: 15px 25px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    transition: 0s;
+    box-shadow: inset 0 1px 1px #ffffff00, 0 1px 2px #08080812, 0 4px 4px #08080814, 0 7px 0 -12px #ffffff, inset 0 6px 12px #ffffff1c;
+    white-space: nowrap;
+    font-family: 'CivilpromFont1', sans-serif;
         }
-        .btn-ui:hover { background: var(--accent); transform: scale(1.05); }
+        .btn-ui:hover {     outline: #ffffff14 solid 8px;
+    outline-offset: 0px;}
 
         /* --- HERO --- */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
@@ -203,8 +213,7 @@ position: absolute;
     </a>
 </div>
         <div class="nav-group">
-            <button class="btn-ui" onclick="document.getElementById('contact').scrollIntoView()">Contact</button>
-            <button class="btn-ui" id="langBtn" onclick="toggleLang()">Visiter Civilprom Français</button>
+            <button class="btn-ui" id="langBtn" onclick="toggleLang()">Français FR</button>
         </div>
     </header>
 
@@ -282,7 +291,7 @@ background-image: radial-gradient(#ffffff1f 1px, transparent 1px);
     .main-title { 
         font-size: clamp(3rem, 7vw, 5.5rem); 
         margin: 0; 
-        letter-spacing: -4px; 
+        letter-spacing: 0px; 
 font-weight: 800;
   cursor: default;
     color: #ffffff;
@@ -299,18 +308,19 @@ font-weight: 800;
     font-weight: 100;
     }
     .btn-mixboard { 
-    background: #000000;
-    color: white;
-    border: 1px solid #ffffff47;
-    padding: 16px 40px;
+background: #a8f277;
+    color: #000000;
+    border: none;
+    padding: 15px 35px 16px 35px;
     font-family: 'CivilpromFont1', sans-serif;
-    box-shadow: inset 0 1px 1px #fff3, 0 1px 2px #08080833, 0 4px 4px #08080814, 0 7px 0 -12px #077ac7, inset 0 6px 12px #ffffff1f;
-    border-radius: 21px;
+    border-radius: 18px;
     text-decoration: none;
-    font-weight: 100;
+    font-weight: 600;
     font-size: 22px;
     display: inline-block;
     transition: transform 0.2s;
+    outline: #a8f277 solid 4px;
+    outline-offset: 5px;
     }
     .btn-mixboard:hover { transform: scale(1.05); }
 
@@ -370,27 +380,27 @@ font-weight: 800;
     <div class="dots-overlay"></div>
 
     <div class="floating-stage">
-        <div class="mix-item mix-raw" id="plate"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/plate-2x.png" width="105"><span class="mix-label">Plate</span></div>
-        <div class="mix-item mix-raw" id="cake"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/cake-2x.png" width="190"><span class="mix-label">Cake</span></div>
-        <div class="mix-item mix-card" id="mug"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/mug-2x.jpg" width="85"><span class="mix-label">Mug</span></div>
+        <div class="mix-item mix-raw" id="plate"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/plate-2x.png" width="105"><span class="mix-label">Website</span></div>
+        <div class="mix-item mix-raw" id="cake"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/cake-2x.png" width="190"><span class="mix-label">Front Code</span></div>
+        <div class="mix-item mix-card" id="mug"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/mug-2x.jpg" width="85"><span class="mix-label">UI/UX</span></div>
 
-        <div class="mix-item mix-card" id="chair"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/chair-2x.jpg" width="130"><span class="mix-label">Chair</span></div>
-        <div class="mix-item mix-card" id="light"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/light-2x.jpg" width="95"><span class="mix-label">Light</span></div>
+        <div class="mix-item mix-card" id="chair"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/chair-2x.jpg" width="130"><span class="mix-label">Logo</span></div>
+        <div class="mix-item mix-card" id="light"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/light-2x.jpg" width="95"><span class="mix-label">Colors</span></div>
 
-        <div class="mix-item mix-raw" id="pants"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/pants-2x.png" width="150"><span class="mix-label">Pants</span></div>
-        <div class="mix-item mix-card" id="cat"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/catTower-2x.jpg" width="115"><span class="mix-label">Cat Tower</span></div>
-        <div class="mix-item mix-raw" id="banana"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/banana-2x.png" width="90"><span class="mix-label">Banana</span></div>
+        <div class="mix-item mix-raw" id="pants"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/pants-2x.png" width="150"><span class="mix-label">Visual Identity</span></div>
+        <div class="mix-item mix-card" id="cat"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/catTower-2x.jpg" width="115"><span class="mix-label">Illustrations</span></div>
+        <div class="mix-item mix-raw" id="banana"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/banana-2x.png" width="90"><span class="mix-label">Typography</span></div>
 
         <div class="mix-item mix-card" id="video-solo">
             <img src="https://civilprom.s3.eu-north-1.amazonaws.com/landing_page_video_thumb-2x.png" width="250">
-            <span class="mix-label">Tutorial</span>
+            <span class="mix-label">Brand Culture & Story</span>
         </div>
     </div>
 
     <div class="central-text">
         <h1 class="main-title">Artistic Services</h1>
         <p class="sub-title">explore, expand, and refine your ideas</p>
-        <a href="#" class="btn-mixboard">Get started</a>
+        <a href="#" class="btn-mixboard" onclick="document.getElementById('contact').scrollIntoView()">Contact</a>
     </div>
 </section>
 
@@ -1057,13 +1067,19 @@ display: none !important;
                 stack.appendChild(c);
             });
 
-            [...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
-                const g = document.createElement('div');
-                g.className = 'srv-gelule';
-                g.innerText = s.toUpperCase();
-                g.onclick = () => { currentIdx = i % servicesData.length; updateUI(); };
-                nav.appendChild(g);
-            });
+[...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
+    const g = document.createElement('div');
+    g.className = 'srv-gelule';
+    
+    // On utilise directement "s" sans transformation
+    g.innerText = s; 
+    
+    g.onclick = () => { 
+        currentIdx = i % servicesData.length; 
+        updateUI(); 
+    };
+    nav.appendChild(g);
+});
 
             // Team Bubbles
             const bCont = document.getElementById('bubbles-container');
@@ -1119,7 +1135,7 @@ display: none !important;
 
         function toggleLang() {
             const btn = document.getElementById('langBtn');
-            btn.innerText = btn.innerText.includes('Français') ? 'Visit Civilprom English' : 'Visiter Civilprom Français';
+            btn.innerText = btn.innerText.includes('Français') ? 'English UK' : 'Français FR';
         }
 
         init();
