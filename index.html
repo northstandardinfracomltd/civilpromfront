@@ -174,10 +174,181 @@
     </header>
 
     <main>
-        <section class="hero">
-            <video class="hero-video" autoplay muted loop playsinline><source src="hero_civilprom.mp4" type="video/mp4"></video>
-            <h1 data-en="CIVILPROM" data-fr="CIVILPROM">CIVILPROM</h1>
-        </section>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Reenie+Beanie&display=swap');
+
+    .mixboard-hero-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    /* --- FOND VIVANT --- */
+    .background-animated {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 1;
+        pointer-events: none;
+    }
+    .blob {
+        position: absolute;
+        width: 45vw; height: 45vw;
+        filter: blur(100px);
+        border-radius: 50%;
+        opacity: 0.65;
+        animation: moveBlobs 15s infinite alternate ease-in-out;
+    }
+    .b-purple { background: #d8b4fe; top: -5%; left: -5%; }
+    .b-blue   { background: #7dd3fc; bottom: -5%; right: -5%; animation-delay: -5s; }
+    .b-orange { background: #fdba74; top: 25%; left: 20%; animation-delay: -10s; }
+
+    @keyframes moveBlobs {
+        from { transform: translate(0, 0) scale(1); }
+        to { transform: translate(50px, 30px) scale(1.1); }
+    }
+
+    /* --- GRILLE DE POINTS --- */
+    .dots-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: radial-gradient(#94a3b8 1.5px, transparent 1.5px);
+        background-size: 30px 30px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    /* --- STAGE LIMITÉ À 900PX --- */
+    .floating-stage {
+        position: absolute;
+        width: 100%;
+        max-width: 900px;
+        height: 100%;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+    }
+
+    /* --- CENTRE --- */
+    .central-text { 
+        text-align: center; 
+        z-index: 100; 
+        max-width: 450px; 
+        pointer-events: auto; 
+    }
+    .main-title { 
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(3rem, 7vw, 5.5rem); 
+        margin: 0; 
+        letter-spacing: -4px; 
+        color: #000; 
+        line-height: 1; 
+    }
+    .sub-title { 
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem; 
+        text-transform: uppercase; 
+        letter-spacing: 2px; 
+        color: #444; 
+        margin: 15px 0 30px; 
+        font-weight: 600; 
+    }
+    .btn-mixboard { 
+        background: #7c3aed; 
+        color: white; 
+        padding: 16px 40px; 
+        border-radius: 60px; 
+        text-decoration: none; 
+        font-weight: 800; 
+        display: inline-block; 
+        transition: transform 0.2s; 
+        font-family: 'Inter', sans-serif;
+    }
+    .btn-mixboard:hover { transform: scale(1.05); }
+
+    /* --- STYLE OBJETS --- */
+    .mix-item { 
+        position: absolute; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        opacity: 0; 
+        animation: fadeInMix 0.8s forwards ease-out;
+        pointer-events: auto;
+    }
+    @keyframes fadeInMix { to { opacity: 1; } }
+
+    .mix-card { background: #fff; padding: 8px; border-radius: 18px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+    .mix-card img { border-radius: 12px; display: block; }
+    .mix-raw img { display: block; filter: drop-shadow(0 12px 12px rgba(0,0,0,0.1)); }
+    .mix-label { font-family: 'Reenie Beanie', cursive; font-size: 1.8rem; color: #000; margin-top: 5px; }
+
+    /* --- POSITIONS (STRICTES 900PX) --- */
+    #plate { bottom: 5%; left: -30px; transform: rotate(-12deg); z-index: 11; }
+    #cake { bottom: 10%; left: 80px; transform: rotate(-5deg); z-index: 12; }
+    #mug { bottom: 25%; left: 10px; transform: rotate(10deg); z-index: 13; }
+
+    #chair { top: 10%; left: -40px; transform: rotate(-8deg); z-index: 12; }
+    #light { top: 5%; left: 120px; transform: rotate(6deg); z-index: 11; }
+
+    #pants { top: 2%; right: -20px; transform: rotate(-4deg); z-index: 11; }
+    #cat { top: 15%; right: 100px; transform: rotate(8deg); z-index: 12; }
+    #banana { top: 35%; right: -10px; transform: rotate(20deg); z-index: 13; }
+
+    #video-solo { bottom: 8%; right: -40px; transform: rotate(3deg); }
+
+    /* --- RESPONSIVE MOBILE --- */
+    @media (max-width: 900px) {
+        .floating-stage { width: 100vw; }
+        #plate { left: -50px; }
+        #chair { left: -60px; }
+        #cat { right: -20px; }
+        #pants { right: -60px; }
+        #banana { right: -40px; }
+        #video-solo { right: -60px; }
+    }
+</style>
+
+<section class="mixboard-hero-wrapper">
+    <div class="background-animated">
+        <div class="blob b-purple"></div>
+        <div class="blob b-blue"></div>
+        <div class="blob b-orange"></div>
+    </div>
+    <div class="dots-overlay"></div>
+
+    <div class="floating-stage">
+        <div class="mix-item mix-raw" id="plate"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/plate-2x.png" width="105"><span class="mix-label">Plate</span></div>
+        <div class="mix-item mix-raw" id="cake"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/cake-2x.png" width="190"><span class="mix-label">Cake</span></div>
+        <div class="mix-item mix-card" id="mug"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/mug-2x.jpg" width="85"><span class="mix-label">Mug</span></div>
+
+        <div class="mix-item mix-card" id="chair"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/chair-2x.jpg" width="130"><span class="mix-label">Chair</span></div>
+        <div class="mix-item mix-card" id="light"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/light-2x.jpg" width="95"><span class="mix-label">Light</span></div>
+
+        <div class="mix-item mix-raw" id="pants"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/pants-2x.png" width="150"><span class="mix-label">Pants</span></div>
+        <div class="mix-item mix-card" id="cat"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/catTower-2x.jpg" width="115"><span class="mix-label">Cat Tower</span></div>
+        <div class="mix-item mix-raw" id="banana"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/banana-2x.png" width="90"><span class="mix-label">Banana</span></div>
+
+        <div class="mix-item mix-card" id="video-solo">
+            <img src="https://civilprom.s3.eu-north-1.amazonaws.com/landing_page_video_thumb-2x.png" width="250">
+            <span class="mix-label">Tutorial</span>
+        </div>
+    </div>
+
+    <div class="central-text">
+        <h1 class="main-title">Mixboard</h1>
+        <p class="sub-title">explore, expand, and refine your ideas</p>
+        <a href="#" class="btn-mixboard">Get started</a>
+    </div>
+</section>
 
         <section class="services-civilprom" id="services">
             <div class="services-wrapper">
