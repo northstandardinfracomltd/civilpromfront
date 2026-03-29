@@ -1060,6 +1060,7 @@ display: none !important;
             [...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
                 const g = document.createElement('div');
                 g.className = 'srv-gelule';
+                g.innerText = s.toUpperCase();
                 g.onclick = () => { currentIdx = i % servicesData.length; updateUI(); };
                 nav.appendChild(g);
             });
