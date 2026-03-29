@@ -1073,121 +1073,65 @@ background: #000000;
 </style>
     </main>
 
-    <script>
+<script>
+    const servicesData = [
+        { title: "Logo", desc: "Identité visuelle pure et marquante.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-0.png" },
+        { title: "Police", desc: "Typographie sur-mesure et exclusive.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-1.png" },
+        { title: "Illustrations", desc: "Narrations graphiques atypiques.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Charte Graphique", desc: "Cohérence visuelle sur tous vos supports.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Kit de Marque", desc: "Les outils essentiels pour votre déploiement.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Directives de marque", desc: "Guide complet d'utilisation de l'image.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Couleurs", desc: "Palette chromatique stratégique.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Culture de marque", desc: "Définition de l'ADN et des valeurs.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "UI/UX", desc: "Interfaces numériques intuitives.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Site internet", desc: "Développement web haute performance.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Ouvrages", desc: "Mise en page et design éditorial.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" },
+        { title: "Stratégie de marque", desc: "Positionnement et vision à long terme.", img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" }
+    ];
 
-        const servicesData = [
-    { 
-        title: "Logo", 
-        desc: "Identité visuelle pure et marquante.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-0.png" 
-    },
-    { 
-        title: "Police", 
-        desc: "Typographie sur-mesure et exclusive.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-1.png" 
-    },
-    { 
-        title: "Illustrations", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Charte Graphique", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Kit de Marque", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Directives de marque", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Couleurs", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Culture de marque", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "UI/UX", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Site internet", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Ouvrages", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-        { 
-        title: "Stratégie de marque", 
-        desc: "Narrations graphiques atypiques.", 
-        img: "https://civilprom.s3.eu-north-1.amazonaws.com/-2.png" 
-    },
-];
+    const members = [
+        {n:"Ronan Roesch", r:"Éditions Artistiques"}, 
+        {n:"AAA BBB", r:"Directeur Opérations"}, 
+        {n:"AAA BBB", r:"Rédactrice"}, 
+        {n:"AAA BBB", r:"Senior AD"}, 
+        {n:"AAA BBB", r:"Graphiste"}, 
+        {n:"AAA BBB", r:"Front Dev"}
+    ];
 
-        const members = [{n:"Ronan Roesch", r:"Éditions Artistiques"}, {n:"AAA BBB", r:"Directeur Opérations"}, {n:"AAA BBB", r:"Rédactrice"}, {n:"AAA BBB", r:"Senior AD"}, {n:"AAA BBB", r:"Graphiste"}, {n:"AAA BBB", r:"Front Dev"}];
+    const stack = document.getElementById('srvStack');
+    const nav = document.getElementById('srvNav');
+    let currentIdx = 0;
 
-        const stack = document.getElementById('srvStack');
-        const nav = document.getElementById('srvNav');
-        let currentIdx = 0;
+    function init() {
+        // 1. Génération des Cartes (Stack)
+        servicesData.forEach((s, i) => {
+            const c = document.createElement('div');
+            c.className = 'srv-card';
+            c.innerHTML = `
+                <div class="card-txt">
+                    <h3>${s.title}</h3>
+                    <p>${s.desc}</p>
+                </div>
+                <div class="card-img" style="background-image:url('${s.img}')"></div>
+            `;
+            stack.appendChild(c);
+        });
 
+        // 2. Génération du Kiosque (Gélules)
+        [...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
+            const g = document.createElement('div');
+            g.className = 'srv-gelule';
+            g.innerText = s.title; 
+            g.onclick = () => { 
+                currentIdx = i % servicesData.length; 
+                updateUI(); 
+            };
+            nav.appendChild(g);
+        });
 
-
-
-function init() {
-    // 1. Génération des Cartes (Stack)
-    servicesData.forEach((s, i) => {
-        const c = document.createElement('div');
-        c.className = 'srv-card';
-        
-        // On utilise s.title, s.desc et s.img au lieu de variables fixes
-        c.innerHTML = `
-            <div class="card-txt">
-                <h3>${s.title}</h3>
-                <p>${s.desc}</p>
-            </div>
-            <div class="card-img" style="background-image:url('${s.img}')"></div>
-        `;
-        stack.appendChild(c);
-    });
-
-    // 2. Génération du Kiosque (Gélules)
-    // On triple le tableau pour l'effet infini
-    [...servicesData, ...servicesData, ...servicesData].forEach((s, i) => {
-        const g = document.createElement('div');
-        g.className = 'srv-gelule';
-        
-        // On affiche le titre de l'objet sans forcer l'Uppercase
-        g.innerText = s.title; 
-        
-        g.onclick = () => { 
-            currentIdx = i % servicesData.length; 
-            updateUI(); 
-        };
-        nav.appendChild(g);
-    });
-
-    setTimeout(() => { 
-        nav.scrollLeft = nav.scrollWidth / 3; 
-        updateUI(); 
-    }, 100);
-}
-
-            // Team Bubbles
-            const bCont = document.getElementById('bubbles-container');
+        // 3. Team Bubbles
+        const bCont = document.getElementById('bubbles-container');
+        if(bCont) {
             members.forEach((m, i) => {
                 const b = document.createElement('div');
                 b.className = 'member-cell';
@@ -1197,53 +1141,65 @@ function init() {
                 b.style.animationDelay = (i * 1.5) + "s";
                 bCont.appendChild(b);
             });
-
-            setTimeout(() => { nav.scrollLeft = nav.scrollWidth / 3; updateUI(); }, 100);
         }
 
-        function updateUI() {
-            const cards = document.querySelectorAll('.srv-card');
-            const gels = document.querySelectorAll('.srv-gelule');
-            const total = servicesData.length;
-            cards.forEach((c, i) => {
-                c.className = 'srv-card';
-                if(i === currentIdx) c.classList.add('active');
-                else if(i === (currentIdx - 1 + total) % total) c.classList.add('prev');
-                else if(i === (currentIdx + 1) % total) c.classList.add('next');
-            });
-            gels.forEach((g, i) => {
-                const isMe = (i % total) === currentIdx;
-                g.classList.toggle('active', isMe);
-                if(isMe && i >= total && i < total * 2) {
-                    const off = g.offsetLeft - (nav.offsetWidth / 2) + (g.offsetWidth / 2);
-                    nav.scrollTo({ left: off, behavior: 'smooth' });
-                }
-            });
-        }
+        // Lancement initial
+        setTimeout(() => { 
+            nav.scrollLeft = nav.scrollWidth / 3; 
+            updateUI(); 
+        }, 100);
+    }
 
-        nav.addEventListener('scroll', () => {
-            const w = nav.scrollWidth / 3;
-            if(nav.scrollLeft < w / 2) nav.scrollLeft += w;
-            if(nav.scrollLeft > w * 2) nav.scrollLeft -= w;
+    function updateUI() {
+        const cards = document.querySelectorAll('.srv-card');
+        const gels = document.querySelectorAll('.srv-gelule');
+        const total = servicesData.length;
+
+        cards.forEach((c, i) => {
+            c.classList.remove('active', 'prev', 'next');
+            if(i === currentIdx) c.classList.add('active');
+            else if(i === (currentIdx - 1 + total) % total) c.classList.add('prev');
+            else if(i === (currentIdx + 1) % total) c.classList.add('next');
         });
 
-        window.addEventListener('scroll', () => {
-            const lift = document.getElementById('diabrowser-lift');
-            const scrolled = window.innerHeight + window.pageYOffset;
-            const total = document.documentElement.scrollHeight;
-            if (scrolled > total - 150) {
-                const delta = scrolled - (total - 150);
-                lift.style.opacity = "0.8";
-                lift.style.transform = `translateY(-${Math.min(delta * 1.8, 380)}px)`;
-            } else { lift.style.opacity = "0"; lift.style.transform = `translateY(0)`; }
+        gels.forEach((g, i) => {
+            const isMe = (i % total) === currentIdx;
+            g.classList.toggle('active', isMe);
+            if(isMe && i >= total && i < total * 2) {
+                const off = g.offsetLeft - (nav.offsetWidth / 2) + (g.offsetWidth / 2);
+                nav.scrollTo({ left: off, behavior: 'smooth' });
+            }
         });
+    }
 
-        function toggleLang() {
-            const btn = document.getElementById('langBtn');
-            btn.innerText = btn.innerText.includes('Français') ? 'English UK' : 'Français FR';
+    nav.addEventListener('scroll', () => {
+        const w = nav.scrollWidth / 3;
+        if(nav.scrollLeft < w / 2) nav.scrollLeft += w;
+        if(nav.scrollLeft > w * 2) nav.scrollLeft -= w;
+    });
+
+    window.addEventListener('scroll', () => {
+        const lift = document.getElementById('diabrowser-lift');
+        if(!lift) return;
+        const scrolled = window.innerHeight + window.pageYOffset;
+        const totalDoc = document.documentElement.scrollHeight;
+        if (scrolled > totalDoc - 150) {
+            const delta = scrolled - (totalDoc - 150);
+            lift.style.opacity = "0.8";
+            lift.style.transform = `translateY(-${Math.min(delta * 1.8, 380)}px)`;
+        } else { 
+            lift.style.opacity = "0"; 
+            lift.style.transform = `translateY(0)`; 
         }
+    });
 
-        init();
-    </script>
+    function toggleLang() {
+        const btn = document.getElementById('langBtn');
+        if(btn) btn.innerText = btn.innerText.includes('Français') ? 'English UK' : 'Français FR';
+    }
+
+    // Lancement de la fonction d'initialisation au chargement
+    window.onload = init;
+</script>
 </body>
 </html>
