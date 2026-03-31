@@ -229,7 +229,7 @@ position: absolute;
     /* On prépare le header pour une disparition fluide */
     /* Remplacez 'header' par la classe ou l'ID de votre header si nécessaire */
     header {
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        transition: opacity 0s ease, visibility 0s ease;
     }
 
     /* Classe qui sera ajoutée par le JavaScript */
@@ -941,33 +941,56 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
 
         <div class="contact-grid">
             
-            <div class="contact-card form-card">
-                <form id="civilContactForm">
-                    <div class="input-group">
-                        <input type="text" id="name" required placeholder=" ">
-                        <label for="name" data-en="Name" data-fr="Nom">Name</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" id="email" required placeholder=" ">
-                        <label for="email" data-en="Email" data-fr="Email">Email</label>
-                    </div>
-                    <div class="input-group">
-                        <textarea id="message" rows="4" required placeholder=" "></textarea>
-                        <label for="message" data-en="Message" data-fr="Message">Message</label>
-                    </div>
-                    <button type="submit" class="submit-btn">
-                        <span data-en="Send" data-fr="ENVOYER LA DEMANDE">Send</span>
-                    </button>
-                </form>
-            </div>
+<form id="civilContactForm">
+    <div class="input-group">
+        <input type="text" id="name" name="name" required placeholder=" ">
+        <label for="name" data-en="Name" data-fr="Nom">Name</label>
+    </div>
+    <div class="input-group">
+        <input type="email" id="email" name="email" required placeholder=" ">
+        <label for="email" data-en="Email" data-fr="Email">Email</label>
+    </div>
+    <div class="input-group">
+        <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+        <label for="message" data-en="Message" data-fr="Message">Message</label>
+    </div>
+    <button type="submit" class="submit-btn">
+        <span data-en="Send" data-fr="Send">Send</span>
+    </button>
+</form>
 
-            <a href="tel:+33000000000" class="contact-card info-card">
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbw6PXaDwwL_MkuRciDWmNmOLmIUfMZtMetIqhkOEACl2G-l1jlOOeYskr-5vzgFByL8/exec'; // Collez l'URL ici
+  const form = document.getElementById('civilContactForm');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = form.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.innerText = "Envoi en cours...";
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+          alert("Merci ! Votre message a été envoyé.");
+          form.reset();
+          btn.disabled = false;
+          btn.innerText = "ENVOYER LA DEMANDE";
+      })
+      .catch(error => {
+          console.error('Erreur!', error.message);
+          alert("Une erreur est survenue lors de l'envoi.");
+          btn.disabled = false;
+      });
+  });
+</script>
+
+            <a href="tel:+33651517065" class="contact-card info-card">
                 <h3 data-en="Infos" data-fr="Infos">Infos</h3>
                 <p>For any inquiries, please contact us via email at mail@civilprom.com or by phone at +33 6 51 51 70 65. Our members are available 24/7.</p>
                 <span class="card-action" data-en="Call now" data-fr="Appeler">Call</span>
             </a>
 
-            <a href="https://wa.me/33000000000" target="_blank" class="contact-card info-card">
+            <a href="https://wa.me/447723501018" target="_blank" class="contact-card info-card">
                 <h3 data-en="WhatsApp" data-fr="WhatsApp">WhatsApp</h3>
                 <p data-en="Instant Message" data-fr="Message Instantané">A dedicated relationship manager is available to chat with you on WhatsApp. We speak English, French, Spanish, and Dutch.</p>
                 <span class="card-action" data-en="Start Chat" data-fr="Discuter">Open</span>
