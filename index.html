@@ -224,6 +224,42 @@ position: absolute;
         </div>
     </header>
 
+
+    <style>
+    /* On prépare le header pour une disparition fluide */
+    /* Remplacez 'header' par la classe ou l'ID de votre header si nécessaire */
+    header {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    /* Classe qui sera ajoutée par le JavaScript */
+    .header-hidden {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none; /* Empêche de cliquer sur le header invisible */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // On sélectionne le header et la section cible
+        const header = document.querySelector('header'); // ou document.getElementById('votre-id-header')
+        const contactSection = document.getElementById('contact');
+
+        if (header && contactSection) {
+            // Événement : la souris entre dans la section
+            contactSection.addEventListener('mouseenter', function() {
+                header.classList.add('header-hidden');
+            });
+
+            // Événement : la souris sort de la section
+            contactSection.addEventListener('mouseleave', function() {
+                header.classList.remove('header-hidden');
+            });
+        }
+    });
+</script>
+
     <main>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Reenie+Beanie&display=swap');
@@ -395,7 +431,7 @@ font-weight: 800;
 
     <div class="central-text">
         <h1 class="main-title">Art's Forge</h1>
-        <p class="sub-title">Big Move Artistic Rebels.<br>Browse our services:</p>
+        <p class="sub-title">Big Move Artistic Rebels</p>
         
     </div>
 </section>
@@ -821,9 +857,9 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
 
 <script>
     const teamByStudio = [
-        [{ n: "Ronan Roesch", r: "Éditions Artistiques" }, { n: "Jakub Noor", r: "Directeur Opérations" }, { n: "Elias Vasconcelos", r: "Rédactrice" }],
-        [{ n: "Stanislas Prins", r: "Senior AD" }, { n: "Marjolein Brunas", r: "Graphiste" }, { n: "Artem Lobnev", r: "Motion" }, { n: "Ulysse Mejdell", r: "UX Res." }],
-        [{ n: "Tristen Verkerk", r: "Front Dev" }, { n: "Angel Diaz", r: "Strategist" }]
+        [{ n: "Ronan Roesch", r: "Lead Operations" }, { n: "Jakub Noor", r: "Artistic Editor" }, { n: "Elias Vasconcelos", r: "Design Drafter" }],
+        [{ n: "Stanislas Prins", r: "Senior Art Director" }, { n: "Marjolein Brunas", r: "Copywriter" }, { n: "Artem Lobnev", r: "Front Developer" }, { n: "Ulysse Mejdell", r: "Graphic Designer" }],
+        [{ n: "Tristen Verkerk", r: "Front Developer" }, { n: "Angel Diaz", r: "Brand Strategist" }]
     ];
 
     function initCloudTeam() {
@@ -1026,14 +1062,18 @@ width: 100%;
     }
 
     .input-group label {
-        position: absolute;
-        top: 10px;
-        left: 0;
-        opacity: 0.3;
-        pointer-events: none;
-        transition: all 0.3s;
-        font-size: 0.8rem;
-        font-weight: 700;
+position: absolute;
+    top: 10px;
+    left: 0;
+    opacity: 1;
+    pointer-events: none;
+    transition: all 0.3s;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    font-family: 'CivilpromFont1', sans-serif;
+        padding-left: 18px;
+    padding-top: 5px;
     }
 
     .input-group input:focus ~ label, 
