@@ -242,20 +242,28 @@ position: absolute;
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // On sélectionne le header et la section cible
-        const header = document.querySelector('header'); // ou document.getElementById('votre-id-header')
-        const contactSection = document.getElementById('contact');
+        const header = document.querySelector('header');
+        const contactSection = document.querySelector('#contact');
 
         if (header && contactSection) {
-            // Événement : la souris entre dans la section
-            contactSection.addEventListener('mouseenter', function() {
-                header.classList.add('header-hidden');
-            });
+            const observerOptions = {
+                root: null, // On observe par rapport au viewport (fenêtre)
+                threshold: 0.1 // Déclenche dès que 10% de la section est visible
+            };
 
-            // Événement : la souris sort de la section
-            contactSection.addEventListener('mouseleave', function() {
-                header.classList.remove('header-hidden');
-            });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // La section contact est à l'écran -> on cache le header
+                        header.classList.add('header-hidden');
+                    } else {
+                        // On sort de la section -> on réaffiche le header
+                        header.classList.remove('header-hidden');
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(contactSection);
         }
     });
 </script>
