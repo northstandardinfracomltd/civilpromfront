@@ -940,7 +940,11 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
         </div>
 
         <div class="contact-grid">
+         
             
+
+
+            <div class="contact-card form-card">
 <form id="civilContactForm">
     <div class="input-group">
         <input type="text" id="name" name="name" required placeholder=" ">
@@ -957,7 +961,7 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
     <button type="submit" class="submit-btn">
         <span data-en="Send" data-fr="Send">Send</span>
     </button>
-</form>
+</form></div>
 
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbw6PXaDwwL_MkuRciDWmNmOLmIUfMZtMetIqhkOEACl2G-l1jlOOeYskr-5vzgFByL8/exec'; // Collez l'URL ici
@@ -967,18 +971,18 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
     e.preventDefault();
     const btn = form.querySelector('.submit-btn');
     btn.disabled = true;
-    btn.innerText = "Envoi en cours...";
+    btn.innerText = "Sending...";
 
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(response => {
-          alert("Merci ! Votre message a été envoyé.");
+          alert("Thank you! Your message has been sent.");
           form.reset();
           btn.disabled = false;
-          btn.innerText = "ENVOYER LA DEMANDE";
+          btn.innerText = "Send";
       })
       .catch(error => {
           console.error('Erreur!', error.message);
-          alert("Une erreur est survenue lors de l'envoi.");
+          alert("An error occurred during sending.");
           btn.disabled = false;
       });
   });
