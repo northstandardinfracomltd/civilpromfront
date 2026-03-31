@@ -118,6 +118,11 @@ background: #350771;
         .deck-viewport { perspective: 2500px; width: 100%; height: 350px; display: flex; justify-content: center; margin-bottom: 30px; }
         .deck-stack { position: relative; width: 90%; max-width: 400px; height: 250px; transform-style: preserve-3d; }
 
+
+        @media (max-width: 768px) {
+ .deck-stack {  height: 310px;  }
+}
+
         .srv-card {
 position: absolute;
     inset: 0;
@@ -250,7 +255,7 @@ position: absolute;
 /* Responsive : ajustement pour mobile */
 @media (max-width: 768px) {
     .logo img {
-        height: 35px; /* Logo légèrement plus petit sur mobile */
+        height: 55px; /* Logo légèrement plus petit sur mobile */
     }
 }
     </style>
@@ -265,7 +270,15 @@ position: absolute;
     </a>
 </div>
         <div class="nav-group">
-            <button class="btn-ui" id="langBtn" onclick="toggleLang()">Follow us LinkedIn</button>
+           <button class="btn-ui" id="linkedinBtn" onclick="openLinkedIn()">
+    Follow us LinkedIn
+</button>
+<script>
+function openLinkedIn() {
+    // Ouvre le lien dans un nouvel onglet
+    window.open('https://www.linkedin.com/company/civilprom-uk/', '_blank');
+}
+</script>
         </div>
     </header>
 
@@ -393,6 +406,15 @@ background-image: radial-gradient(#ffffff1f 1px, transparent 1px);
         max-width: 100%; 
         pointer-events: auto; 
     }
+
+
+    @media (max-width: 900px) {
+    .main-title  {
+            font-size: 80px !important;
+    }
+}
+
+
     .main-title { 
         font-size: 200px; 
         margin: 0; 
@@ -510,7 +532,25 @@ font-weight: 700;
             <p class="portfolio-intro" data-en="Our curated chaos of pixels and bold prompts. No tickets and no velvet ropes here—just a front-row seat to our latest masterpieces and artistic big moves." data-fr="Our curated chaos of pixels and bold prompts. No tickets and no velvet ropes here—just a front-row seat to our latest masterpieces and artistic big moves.">
                 Our curated chaos of pixels and bold prompts. No tickets and no velvet ropes here—just a front-row seat to our latest masterpieces and artistic big moves.
             </p>
-            <a href="#" class="btn-mixboard" onclick="document.getElementById('contact').scrollIntoView()">Contact</a>
+           <a href="#contact" class="btn-mixboard" id="contact-trigger">Contact</a>
+           <script>
+            document.getElementById('contact-trigger').addEventListener('click', function(e) {
+    // 1. On empêche le comportement par défaut (le saut brusque)
+    e.preventDefault();
+
+    // 2. On cible l'élément avec l'ID "contact"
+    const targetElement = document.getElementById('contact');
+
+    // 3. On déclenche le défilement fluide
+    if (targetElement) {
+        targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start' // Aligne le haut de la section au haut de la fenêtre
+        });
+    }
+});
+
+           </script>
         </div>
 
         <div class="portfolio-viewport">
@@ -856,6 +896,7 @@ display: flex;
             flex-direction: column;
             text-align: center;
             padding: 20px;
+            max-width: 93%;
         }
 
         .cp-live-button {
@@ -908,7 +949,7 @@ display: flex;
     .studio-meta p { color: #fff; cursor: default; font-size: 22px; line-height: 1.5; font-family: 'CivilpromFont1', sans-serif; }
 
     /* NUAGE DE CELLULES */
-    .member-cloud { position: absolute; top: -30px; left: -35px; width: 100%; height: 350px; pointer-events: none; z-index: 100; }
+    .member-cloud { position: absolute; top: -30px; left: -35px; width: auto; height: 350px; pointer-events: none; z-index: 100; }
 
     /* CONTENEUR DE FLOTTEMENT (Gère l'animation CSS) */
     .member-floater {
