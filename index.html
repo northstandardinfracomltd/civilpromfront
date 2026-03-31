@@ -693,6 +693,81 @@ font-size: 18px;
     </div>
 </section>
 
+
+<br>
+
+<style>
+    .cp-live-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-left: 5px solid #007bff;
+        padding: 20px 30px;
+        border-radius: 8px;
+        font-family: sans-serif;
+        margin: 20px 0;
+    }
+
+    .cp-live-text {
+        color: #333;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .cp-live-button {
+        display: inline-block;
+        background-color: #007bff;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        padding: 12px 24px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        white-space: nowrap;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .cp-live-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive: Stacks vertically on mobile */
+    @media (max-width: 768px) {
+        .cp-live-banner {
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cp-live-button {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+</style>
+
+<div class="cp-live-banner">
+    <p class="cp-live-text">
+        Are you looking for information about our audiovisual production branch? 
+        Visit the <strong>Civilprom Live Division (CLD)</strong> website.
+    </p>
+    <a href="https://livedivision.civilprom.com" 
+       class="cp-live-button" 
+       target="_blank" 
+       rel="noopener noreferrer">
+        Visit CLD Website
+    </a>
+</div>
+
+
+
+
+
 <style>
     .civil-team-canvas { background: #1a0a2f;     padding-bottom: 150px;
     padding-top: 35px; position: relative; overflow: hidden; }
@@ -711,7 +786,7 @@ font-size: 18px;
     .studio-meta p { color: #fff; cursor: default; font-size: 22px; line-height: 1.5; font-family: 'CivilpromFont1', sans-serif; }
 
     /* NUAGE DE CELLULES */
-    .member-cloud { position: absolute; top: -10px; left: -15px; width: 100%; height: 350px; pointer-events: none; z-index: 100; }
+    .member-cloud { position: absolute; top: -30px; left: -35px; width: 100%; height: 350px; pointer-events: none; z-index: 100; }
 
     /* CONTENEUR DE FLOTTEMENT (Gère l'animation CSS) */
     .member-floater {
@@ -1055,26 +1130,24 @@ background: #000000;
 <script>
     const servicesData = [
 { title: "Logo", desc: "Crafting pure and striking visual identities that leave a lasting iconic impression." },
+{ title: "Color Palette", desc: "A strategic chromatic system designed to trigger the right emotional response." },
 { title: "Typography", desc: "Bespoke and exclusive type design tailored to your brand’s unique voice." },
 { title: "Illustrations", desc: "Atypical graphic narratives that transform complex ideas into captivating art." },
+{ title: "UI/UX", desc: "Designing intuitive and aesthetic digital interfaces centered on user experience." },
+{ title: "Website", desc: "High-performance web development merging clean code with premium design." },
 { title: "Brand Identity", desc: "Ensuring seamless visual consistency across all your physical and digital touchpoints." },
 { title: "Brand Kit", desc: "The essential toolkit and core assets designed for your immediate market deployment." },
 { title: "Brand Guidelines", desc: "A comprehensive manual defining the rules for perfect image usage and integrity." },
-{ title: "Color Palette", desc: "A strategic chromatic system designed to trigger the right emotional response." },
 { title: "Brand Culture", desc: "Defining your brand’s DNA and core values to build a meaningful heritage." },
-{ title: "UI/UX", desc: "Designing intuitive and aesthetic digital interfaces centered on user experience." },
-{ title: "Website", desc: "High-performance web development merging clean code with premium design." },
+{ title: "Brand Strategy", desc: "Long-term vision and positioning to navigate the market with purpose." },
+{ title: "Brand Portal", desc: "A centralized hub to access your brand guidelines and creative resources, ensuring total visual consistency." },
 { title: "Editorial Design", desc: "High-end layout and craftsmanship for books, magazines, and digital publications." },
-{ title: "Brand Strategy", desc: "Long-term vision and positioning to navigate the market with purpose." }
+{ title: "Assets Storage", desc: "A secure repository to manage file versions and generate instant source or sharing links for your team." }
     ];
 
     const members = [
-        {n:"Ronan Roesch", r:"Éditions Artistiques"}, 
-        {n:"Noor Werts", r:"Directeur Opérations"}, 
-        {n:"Nina Jagers", r:"Rédactrice"}, 
-        {n:"Stanislas Prins", r:"Senior AD"}, 
-        {n:"Marjolein Brunas", r:"Graphiste"}, 
-        {n:"Artem Lobnev", r:"Front Dev"}
+        {n:"X", r:"X"}, 
+        {n:"S", r:"S"}
     ];
 
     const stack = document.getElementById('srvStack');
