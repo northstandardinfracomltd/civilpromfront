@@ -229,17 +229,26 @@ position: absolute;
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Reenie+Beanie&display=swap');
 
     .mixboard-hero-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        min-height: 600px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #350770 !important;
-        overflow: hidden;
-        z-index: 1;
+    position: relative;
+    width: 100%;
+    padding-top: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #350770 !important;
+    overflow: hidden;
+    z-index: 1;
     }
+
+    /* La couleur du fond et du texte lors de la sélection */
+::selection {
+    background-color: transparent; /* Un jaune vif par exemple */
+}
+
+/* Pour une compatibilité maximale avec les anciens navigateurs Firefox */
+::-moz-selection {
+    background-color: transparent;
+}
 
     /* --- FOND VIVANT --- */
     .background-animated {
@@ -315,14 +324,15 @@ font-weight: 800;
     font-weight: 100;
     }
     .btn-mixboard { 
-background: #a8f277;
-    color: #31036c;
+    background: #a8f277;
+    color: #1a0a2f;
     border: none;
     padding: 13px 30px 14px 30px;
     font-family: 'CivilpromFont1', sans-serif;
     border-radius: 18px;
     text-decoration: none;
     font-weight: 900;
+    margin-top: 30px;
     font-size: 22px;
     display: inline-block;
     transition: transform 0.2s;
@@ -452,6 +462,7 @@ background: #1a0a2f;
 
     .portfolio-header {
         padding: 0 5%;
+        text-align: right;
         margin-bottom: 50px;
     }
 
@@ -833,8 +844,7 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
                         <label for="message" data-en="Message" data-fr="Message">Message</label>
                     </div>
                     <button type="submit" class="submit-btn">
-                        <span data-en="SEND REQUEST" data-fr="ENVOYER LA DEMANDE">SEND REQUEST</span>
-                        <div class="btn-line"></div>
+                        <span data-en="Send" data-fr="ENVOYER LA DEMANDE">Send</span>
                     </button>
                 </form>
             </div>
@@ -853,11 +863,21 @@ position: relative; background: #281442; color: #fffdfd; padding: 10px 22px; fon
 
         </div>
 
-        <p>© 2026 CIVILPROM — BEYOND GRAPHICS — BUILT WITH PURE CODE</p>
+        <p class="endtxt">© 2026 Civilprom Reg1882671</p>
     </div>
 </section>
 
 <style>
+
+    .endtxt  {
+color: #000;
+font-family: 'CivilpromFont1', sans-serif;
+font-size: 18px;
+cursor: default;
+margin-top:80px;
+    }
+
+
     .civil-contact-section {
         background: #a8f277;
         padding: 120px 5%;
@@ -956,6 +976,7 @@ width: 100%;
 
     .submit-btn {
 background: #000000;
+color: #fff; 
     border: 1px solid #000000;
     border-radius: 18px;
     padding: 15px 25px;
