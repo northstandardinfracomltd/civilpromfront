@@ -82,18 +82,15 @@
         .spec-item h2 { font-family: var(--text-title); font-size: 2.8rem; margin-bottom: 15px; text-transform: uppercase; }
         .spec-item p { color: #ccc; font-size: 0.95rem; max-width: 300px; }
 
-        /* EQUIPMENT & STAFF (SCROLLABLE) */
+        /* EQUIPMENT & STAFF */
         .scroll-container { padding: 120px 10% 60px; overflow-y: auto; height: 100%; background: #050505; }
         .scroll-container h2 { font-family: var(--text-title); font-size: 3rem; text-transform: uppercase; margin-bottom: 10px; }
-        .scroll-container > p { color: #888; margin-bottom: 40px; }
         .equip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .equip-card { background: #000; border: 1px solid #111; transition: 0.3s; }
-        .equip-card:hover { border-color: #333; transform: translateY(-2px); }
-        .equip-card img { width: 100%; height: 170px; object-fit: cover; opacity: 0.5; filter: grayscale(1); transition: 0.3s; }
-        .equip-card:hover img { opacity: 0.8; filter: grayscale(0); }
+        .equip-card img { width: 100%; height: 170px; object-fit: cover; opacity: 0.5; filter: grayscale(1); }
         .equip-card-body { padding: 20px; }
         .equip-card h4 { font-family: var(--text-title); font-size: 1.1rem; margin-bottom: 5px; text-transform: uppercase; color: #fff; }
-        .equip-card p { font-size: 0.8rem; color: #999; line-height: 1.4; }
+        .equip-card p { font-size: 0.8rem; color: #999; }
 
         /* MAP SECTION */
         .map-content { 
@@ -104,7 +101,6 @@
             align-items: center; 
             background: #000;
             position: relative;
-            flex-grow: 1;
         }
 
         .map-bg-grid {
@@ -116,7 +112,7 @@
                 linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
             background-size: 50px 50px;
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
         }
 
@@ -127,21 +123,21 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            z-index: 1;
+            z-index: 5;
         }
-        .map-svg { width: 100%; height: 100%; overflow: visible; }
+        .map-svg { width: 100%; height: 100%; overflow: visible; display: block; }
         
-        .city-group circle.dot { fill: #fff; r: 2.5; filter: drop-shadow(0 0 3px #fff); transition: 0.3s; }
-        .city-group:hover circle.dot { r: 4; fill: var(--accent); }
+        .city-group { opacity: 1 !important; visibility: visible !important; }
+        .city-group circle.dot { fill: #fff !important; stroke: none; transition: 0.3s; }
         .city-group circle.pulse {
-            fill: none; stroke: #fff; stroke-width: 0.5; r: 2.5;
+            fill: none; stroke: #fff; stroke-width: 0.5;
             animation: pulse-ring 2.5s infinite; opacity: 0;
         }
         @keyframes pulse-ring {
             0% { r: 2.5; opacity: 0.6; }
             100% { r: 15; opacity: 0; }
         }
-        .city-label { fill: #666; font-size: 9px; font-family: var(--text-main); letter-spacing: 1px; text-transform: uppercase; pointer-events: none; transition: 0.3s; }
+        .city-label { fill: #666; font-size: 9px; font-family: var(--text-main); letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
         .city-group:hover .city-label { fill: #fff; font-size: 10px; }
 
         .data-streak {
@@ -160,14 +156,13 @@
             100% { stroke-dashoffset: 0; opacity: 0; }
         }
 
-        .location-info { z-index: 1; }
+        .location-info { z-index: 5; }
         .location-info h2 { font-family: var(--text-title); font-size: 3rem; margin-bottom: 30px; text-transform: uppercase; }
         .location-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         .country-block h4 { font-size: 0.7rem; color: #555; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
         .country-block p { font-size: 0.9rem; color: #ccc; line-height: 1.5; }
         .cn-main { font-weight: bold; color: #fff; border-bottom: 1px solid white; }
 
-        /* FOOTER */
         footer {
             padding: 40px 10%;
             background: #000;
@@ -202,9 +197,8 @@
         </div>
     </header>
 
-    <!-- SECTION 1: HERO -->
     <section>
-        <video class="hero-video" autoplay muted loop playsinline poster="">
+        <video id="bgVideo" class="hero-video" autoplay muted loop playsinline x5-playsinline webkit-playsinline>
             <source src="https://civilprom.s3.eu-north-1.amazonaws.com/backgroundvide.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
@@ -224,7 +218,6 @@
         </div>
     </section>
 
-    <!-- SECTION 2: SPECIALITIES -->
     <section>
         <div class="spec-grid">
             <div class="spec-item" style="background: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=800') center/cover;">
@@ -242,14 +235,12 @@
         </div>
     </section>
 
-    <!-- SECTION 3: FLEET & CREW -->
     <section>
         <div class="scroll-container">
             <h2 class="tr" data-en="FLEET & CREW" data-fr="MATÉRIEL & STAFF">FLEET & CREW</h2>
-            <p class="tr" data-en="Available for full production, dry hire, or on-demand staffing." data-fr="Disponible pour la production complète, la location seule ou l'embauche à la demande.">Available for full production, dry hire, or on-demand staffing.</p>
             <div class="equip-grid">
-                <div class="equip-card"><img src="https://images.unsplash.com/photo-1589152121163-f0043ac39807?q=80&w=400"><div class="equip-card-body"><h4 class="tr" data-en="Cameras" data-fr="Caméras">Cameras</h4><p>4K/UHD Broadcast & Cinema chains.</p></div></div>
-                <div class="equip-card"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=400"><div class="equip-card-body"><h4 class="tr" data-en="Microphones" data-fr="Micros">Microphones</h4><p>Pro audio capture & RF systems.</p></div></div>
+                <div class="equip-card"><img src="https://images.unsplash.com/photo-1589152121163-f0043ac39807?q=80&w=400"><div class="equip-card-body"><h4>Cameras</h4><p>4K/UHD Broadcast & Cinema chains.</p></div></div>
+                <div class="equip-card"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=400"><div class="equip-card-body"><h4>Microphones</h4><p>Pro audio capture & RF systems.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1473960114532-7502cd44a693?q=80&w=400"><div class="equip-card-body"><h4>Skycam / Spidercam</h4><p>Cable aerial camera systems.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=400"><div class="equip-card-body"><h4>Drones</h4><p>Cinematic UAV fleet.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1475721027785-f74dea327912?q=80&w=400"><div class="equip-card-body"><h4>Structure</h4><p>Stages & scenic layouts.</p></div></div>
@@ -258,15 +249,14 @@
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=400"><div class="equip-card-body"><h4>Light Truck</h4><p>Agile production vans.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=400"><div class="equip-card-body"><h4>Heavy Truck</h4><p>Full OB Trailers.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1541625602330-2277a4c4b28d?q=80&w=400"><div class="equip-card-body"><h4>Scissor Lift</h4><p>Nacelles for high angles.</p></div></div>
-                <div class="equip-card"><img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?q=80&w=400"><div class="equip-card-body"><h4>Telehandler</h4><p>Site logistics handlers.</p></div></div>
+                <div class="equip-card"><img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?q=80&w=400"><div class="equip-card-body"><h4>Telehandler</h4><p>Télescopiques & site logistics.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=400"><div class="equip-card-body"><h4>Forklift</h4><p>Chariots for material handling.</p></div></div>
-                <div class="equip-card"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=400"><div class="equip-card-body"><h4>Support Staff</h4><p>Certified PL drivers & security.</p></div></div>
+                <div class="equip-card"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=400"><div class="equip-card-body"><h4>Support Staff</h4><p>Drivers & Site assistance.</p></div></div>
                 <div class="equip-card"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=400"><div class="equip-card-body"><h4>Technical Staff</h4><p>Ops, Engineers, Directors.</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4: NETWORK + FOOTER -->
     <section style="display: flex; flex-direction: column;">
         <div class="map-bg-grid"></div>
         <div class="map-content">
@@ -289,9 +279,7 @@
         </div>
 
         <footer>
-            <div class="footer-copy">
-                &copy; 2026 CIVILPROM LIVE DIVISION. ALL RIGHTS RESERVED.
-            </div>
+            <div class="footer-copy">&copy; 2026 CIVILPROM LIVE DIVISION. ALL RIGHTS RESERVED.</div>
             <div class="footer-contacts">
                 <a href="mailto:contact@civilprom.com">CONTACT@CIVILPROM.COM</a>
                 <a href="#" class="tr" data-en="LEGAL MENTIONS" data-fr="MENTIONS LÉGALES">LEGAL MENTIONS</a>
@@ -323,27 +311,50 @@
             { id: 'monaco', cx: 380, cy: 340, name: 'Monaco' }
         ];
 
+        // Video Force Autoplay for Safari
+        function forceAutoplay() {
+            const video = document.getElementById('bgVideo');
+            if (video) {
+                video.muted = true; // Essential
+                video.play().catch(error => {
+                    console.log("Autoplay blocked, waiting for interaction.");
+                    document.addEventListener('click', () => {
+                        video.play();
+                    }, { once: true });
+                });
+            }
+        }
+
         window.onload = () => {
-            const v = document.querySelector('video');
-            v.play().catch(() => { document.addEventListener('click', () => v.play(), {once: true}); });
+            forceAutoplay();
             
             const citiesGroup = document.getElementById('citiesGroup');
             cities.forEach(city => {
                 const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
                 g.setAttribute('class', 'city-group');
+                
                 const pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                 pulse.setAttribute('class', 'pulse');
-                pulse.setAttribute('cx', city.cx); pulse.setAttribute('cy', city.cy);
+                pulse.setAttribute('cx', city.cx); 
+                pulse.setAttribute('cy', city.cy);
+                pulse.setAttribute('r', city.main ? 5 : 2.5);
+                
                 const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                 dot.setAttribute('class', 'dot');
-                dot.setAttribute('cx', city.cx); dot.setAttribute('cy', city.cy);
-                if(city.main) { dot.style.r = 5; dot.style.fill = '#fff'; }
+                dot.setAttribute('cx', city.cx); 
+                dot.setAttribute('cy', city.cy);
+                dot.setAttribute('r', city.main ? 5 : 2.5);
+                
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                 text.setAttribute('class', 'city-label');
-                text.setAttribute('x', city.cx + 8); text.setAttribute('y', city.cy + 3);
+                text.setAttribute('x', city.cx + 8); 
+                text.setAttribute('y', city.cy + 3);
                 text.textContent = city.name;
-                if(city.main) { text.style.fill = '#fff'; text.style.fontWeight = 'bold'; }
-                g.appendChild(pulse); g.appendChild(dot); g.appendChild(text);
+                if(city.main) { text.setAttribute('style', 'fill:#fff; font-weight:bold;'); }
+                
+                g.appendChild(pulse); 
+                g.appendChild(dot); 
+                g.appendChild(text);
                 citiesGroup.appendChild(g);
             });
 
