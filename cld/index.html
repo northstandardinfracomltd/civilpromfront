@@ -85,16 +85,22 @@
 
         /* HERO & SERVICES */
         .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-        .overlay { position: absolute; inset: 0; background: #350770f2; z-index: 0; }
+        .overlay { position: absolute; inset: 0; background: linear-gradient(130deg, #34155c, #adff779c); z-index: 0; }
         .hero-content { position: relative; z-index: 10; padding: 0 10%; max-width: 1200px; }
-        h1 { font-family: var(--text-title); font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 0.9; margin-bottom: 15px; text-transform: uppercase; }
+        h1 { font-family: var(--text-title);
+    font-size: 130px;
+    line-height: 0.9;
+    font-weight: 900;
+    margin-left: -6px;
+    margin-bottom: 15px;
+    text-transform: uppercase; }
         .hero-tagline { font-size: 1.1rem; margin-bottom: 35px; letter-spacing: 2px; color: #aaa; text-transform: uppercase;}
         
         .services-overlay-card {
             background: transparent; backdrop-filter: none; padding: 0px;
-            border-radius: 0px; border-left: 3px solid white; max-width: 600px;
+            border-radius: 0px;  max-width: 770px;
         }
-        .services-overlay-card p { font-size: 22px; margin-bottom: 20px; color: #eee; line-height: 1.5; }
+        .services-overlay-card p { font-size: 28px; margin-bottom: 20px; color: #eee; line-height: 1.5; }
         .pill-container { display: flex; flex-wrap: wrap; gap: 10px; }
         .pill { background: white; color: black; padding: 6px 15px; font-size: 0.7rem; font-weight: bold; border-radius: 1px; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -155,8 +161,8 @@
             -webkit-mask-image: radial-gradient(circle at 30% 50%, #1a0a2f 40%, transparent 90%);
             mask-image: radial-gradient(circle at 30% 50%, #1a0a2f 40%, transparent 90%);
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+                linear-gradient(to right, rgb(255 255 255 / 4%) 1px, transparent 1px), 
+                linear-gradient(to bottom,rgb(255 255 255 / 4%) 1px, transparent 1px);
             background-size: 50px 50px;
             z-index: 1;
             pointer-events: none;
@@ -174,17 +180,22 @@
         .map-svg { width: 100%; height: 100%; overflow: visible; display: block; }
         
         .city-group { opacity: 1 !important; visibility: visible !important; }
-        .city-group circle.dot { fill: #fff !important; stroke: none; transition: 0.3s; }
+        .city-group circle.dot { fill: #a8f277 !important; stroke: none; transition: 0.3s; }
         .city-group circle.pulse {
-            fill: none; stroke: #fff; stroke-width: 0.5;
+            fill: none; stroke: #a8f277; stroke-width: 1.5;
             animation: pulse-ring 2.5s infinite; opacity: 0;
         }
         @keyframes pulse-ring {
             0% { r: 2.5; opacity: 0.6; }
             100% { r: 15; opacity: 0; }
         }
-        .city-label { fill: #666; font-size: 9px; font-family: var(--text-main); letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
-        .city-group:hover .city-label { fill: #fff; font-size: 10px; }
+        .city-label {     fill: #ffffff;
+    font-size: 18px;
+    font-family: var(--text-main);
+    letter-spacing: 0px;
+    transition: 0.3s;
+    cursor: default;
+    transition-duration: 0s; }
 
         .data-streak {
             fill: none;
@@ -210,15 +221,15 @@
         .cn-main { font-weight: bold; color: #fff; border-bottom: 1px solid white; }
 
         footer {
-            padding: 40px 10%;
-            background: #1a0a2f;
-            border-top: 1px solid #111;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: #444;
-            z-index: 10;
+    padding: 40px 10%;
+    background: #a8f277;
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #1a0a2f;
+    z-index: 10;
         }
         .footer-contacts a { color: #888; text-decoration: none; margin-left: 20px; transition: 0.3s; }
         .footer-contacts a:hover { color: #fff; }
@@ -238,8 +249,7 @@
     <header>
         <div class="logo"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/CIVILPROM+2026+BLACK.svg" alt="CLD Logo"></div>
         <div class="header-actions">
-            <a href="mailto:contact@civilprom.com" class="btn-contact tr" data-en="Get in touch" data-fr="Contactez-nous">Get in touch</a>
-            <button class="lang-switch" id="langBtn" onclick="toggleLanguage()">FR</button>
+            <a href="mailto:contact@civilprom.com" class="btn-contact tr" data-en="Get in touch" data-fr="Contactez-nous">Contact</a>
         </div>
     </header>
 
@@ -252,28 +262,21 @@
             <h1 class="tr" data-en="CLD" data-fr="CLD">CLD</h1>
             <div class="services-overlay-card">
                 <p class="tr" data-en="CIVILPROM LIVE DIVISION (CLD) is an agile production house specializing in the capture, diffusion, and global distribution of high-tier content. From spontaneous shoots to long-term seasonal installations and roadshows, we provide flexible expert solutions." data-fr="CLD est une entreprise de production agile spécialisée dans la captation, la diffusion et la distribution mondiale de contenus premium. Des prestations spontanées aux installations saisonnières de longue durée et aux roadshows, nous proposons des solutions expertes et flexibles.">CLD is an agile production house specializing in the capture, diffusion, and global distribution of high-tier content. From spontaneous shoots to long-term seasonal installations and roadshows, we provide flexible expert solutions.</p>
-                <div class="pill-container">
-                    <span class="pill tr" data-en="Consulting" data-fr="Consultant">Consulting</span>
-                    <span class="pill tr" data-en="Independent VOD Platforms" data-fr="Conception Plateforme VOD">Independent VOD Platforms</span>
-                    <span class="pill tr" data-en="Global Broadcast" data-fr="Diffusion Mondiale">Global Broadcast</span>
-                    <span class="pill tr" data-en="Live Captation" data-fr="Captation Live">Live Captation</span>
-                    <span class="pill tr" data-en="Agile Roadshows" data-fr="Roadshows Agiles">Agile Roadshows</span>
-                </div>
             </div>
         </div>
     </section>
 
     <section>
         <div class="spec-grid">
-            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #a8f2775c), url('https://civilprom.s3.eu-north-1.amazonaws.com/sport.png') center/cover;">
+            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/sport.png') center/cover;">
                 <h2 class="tr" data-en="SPORT" data-fr="SPORT">SPORT</h2>
                 <p class="tr" data-en="Live sporting events, tournaments and high-speed motion capture." data-fr="Rencontres sportives, tournois et captation de mouvement haute vitesse.">Live sporting events, tournaments and high-speed motion capture.</p>
             </div>
-            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #a8f2775c), url('https://civilprom.s3.eu-north-1.amazonaws.com/culture.png') center/cover;">
+            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/culture.png') center/cover;">
                 <h2 class="tr" data-en="CULTURE" data-fr="CULTURE">CULTURE</h2>
                 <p class="tr" data-en="Music festivals, performing arts, and large-scale cultural broadcasts." data-fr="Festivals de musique, arts vivants et diffusions culturelles d'envergure.">Music festivals, performing arts, and large-scale cultural broadcasts.</p>
             </div>
-            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #a8f2775c), url('https://civilprom.s3.eu-north-1.amazonaws.com/experience.png') center/cover;">
+            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/experience.png') center/cover;">
                 <h2 class="tr" data-en="EXPERIENCE" data-fr="EXPÉRIENCE">EXPERIENCE</h2>
                 <p class="tr" data-en="Premium corporate events, brand activations, and immersive roadshows." data-fr="Événements d'entreprise premium, activations de marque et roadshows immersifs.">Premium corporate events, brand activations, and immersive roadshows.</p>
             </div>
@@ -283,6 +286,7 @@
     <section>
         <div class="scroll-container">
             <h2 class="tr" data-en="FLEET & CREW" data-fr="MATÉRIEL & STAFF">FLEET & CREW</h2>
+            <p class="physio" data-en="Il s'agit de notre écosystème de matériels et personnels que nous déployons lors de nos opérations, ces moyens sont aussi disponibles à la location." data-fr="Il s'agit de notre écosystème de matériels et personnels que nous déployons lors de nos opérations, ces moyens sont aussi disponibles à la location.">Il s'agit de notre écosystème de matériels et personnels que nous déployons lors de nos opérations, ces moyens sont aussi disponibles à la location.</p>
             <div class="equip-grid">
                 <div class="equip-card"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/camera.png"><div class="equip-card-body"><h4>Cameras</h4><p>4K/UHD Broadcast & Cinema chains.</p></div></div>
                 <div class="equip-card"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/audio.png"><div class="equip-card-body"><h4>Microphones</h4><p>Pro audio capture & RF systems.</p></div></div>
@@ -342,7 +346,7 @@
         }
 
         const cities = [
-            { id: 'glasgow', cx: 150, cy: 80, name: 'Glasgow', main: true },
+            { id: 'glasgow', cx: 150, cy: 80, name: 'Glasgow'},
             { id: 'london', cx: 200, cy: 150, name: 'London' },
             { id: 'amsterdam', cx: 350, cy: 150, name: 'Amsterdam' },
             { id: 'antwerp', cx: 320, cy: 180, name: 'Antwerp' },
