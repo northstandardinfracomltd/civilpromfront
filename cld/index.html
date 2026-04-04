@@ -105,10 +105,10 @@
         .pill { background: white; color: black; padding: 6px 15px; font-size: 0.7rem; font-weight: bold; border-radius: 1px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* SPECIALITIES */
-        .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); height: 100%; }
+        .spec-grid {border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: grid; grid-template-columns: repeat(3, 1fr); height: 100%; }
         .spec-item { display: flex; flex-direction: column; justify-content: flex-end; padding: 60px; border-right: 1px solid rgba(255,255,255,0.05); transition: 0.5s ease; position: relative; }
         .spec-item:hover { background: rgba(255,255,255,0.03); }
-        .spec-item h2 { font-family: var(--text-title); font-size: 2.8rem; margin-bottom: 15px; text-transform: uppercase; }
+        .spec-item h2 { font-family: var(--text-title); font-size: 64px; margin-bottom: 15px; }
         .spec-item p { color: #ffffff;
     font-size: 22px;
     max-width: 300px;
@@ -167,6 +167,19 @@
             z-index: 1;
             pointer-events: none;
         }
+
+
+        .physio {
+          font-size: 22px;
+          color:#000;
+          margin-bottom: 15px;
+        }
+
+           .physiolink {
+          font-size: 22px;
+          color: #a8f277 !important;
+        }
+
 
         .constellation-container { 
             width: 100%; 
@@ -249,7 +262,7 @@
     <header>
         <div class="logo"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/CIVILPROM+2026+BLACK.svg" alt="CLD Logo"></div>
         <div class="header-actions">
-            <a href="mailto:contact@civilprom.com" class="btn-contact tr" data-en="Get in touch" data-fr="Contactez-nous">Contact</a>
+            <a href="mailto:cld@civilprom.com" class="btn-contact tr" >cld@civilprom.com</a>
         </div>
     </header>
 
@@ -269,15 +282,15 @@
     <section>
         <div class="spec-grid">
             <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/sport.png') center/cover;">
-                <h2 class="tr" data-en="SPORT" data-fr="SPORT">SPORT</h2>
+                <h2 class="tr" >Sport</h2>
                 <p class="tr" data-en="Live sporting events, tournaments and high-speed motion capture." data-fr="Rencontres sportives, tournois et captation de mouvement haute vitesse.">Live sporting events, tournaments and high-speed motion capture.</p>
             </div>
             <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/culture.png') center/cover;">
-                <h2 class="tr" data-en="CULTURE" data-fr="CULTURE">CULTURE</h2>
+                <h2 class="tr" >Culture</h2>
                 <p class="tr" data-en="Music festivals, performing arts, and large-scale cultural broadcasts." data-fr="Festivals de musique, arts vivants et diffusions culturelles d'envergure.">Music festivals, performing arts, and large-scale cultural broadcasts.</p>
             </div>
             <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/experience.png') center/cover;">
-                <h2 class="tr" data-en="EXPERIENCE" data-fr="EXPÉRIENCE">EXPERIENCE</h2>
+                <h2 class="tr" >Experience</h2>
                 <p class="tr" data-en="Premium corporate events, brand activations, and immersive roadshows." data-fr="Événements d'entreprise premium, activations de marque et roadshows immersifs.">Premium corporate events, brand activations, and immersive roadshows.</p>
             </div>
         </div>
@@ -285,8 +298,8 @@
 
     <section>
         <div class="scroll-container">
-            <h2 class="tr" data-en="FLEET & CREW" data-fr="MATÉRIEL & STAFF">FLEET & CREW</h2>
-<p class="physio">This is our ecosystem of equipment and personnel that we deploy during our operations; these resources are also available for rent. For any inquiries, please contact us at <a href="mailto:cld@civilprom.com">cld@civilprom.com</a></p>
+            <h2 class="tr" >Fleet & Crew</h2>
+<p class="physio">This is our ecosystem of equipment and personnel that we deploy during our operations; these resources are also available for rent. For any inquiries, please contact us at <a class="physiolink" href="mailto:cld@civilprom.com">cld@civilprom.com</a></p>
             <div class="equip-grid">
                 <div class="equip-card"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/camera.png"><div class="equip-card-body"><h4>Cameras</h4><p>4K/UHD Broadcast & Cinema chains.</p></div></div>
                 <div class="equip-card"><img src="https://civilprom.s3.eu-north-1.amazonaws.com/audio.png"><div class="equip-card-body"><h4>Microphones</h4><p>Pro audio capture & RF systems.</p></div></div>
@@ -316,14 +329,14 @@
                 </svg>
             </div>
             <div class="location-info">
-                <h2 class="tr" data-en="EURO NETWORK" data-fr="RÉSEAU EUROPE">EURO NETWORK</h2>
+                <h2 class="tr" >12 Sites</h2>
                 <div class="location-grid">
                     <div class="country-block"><h4>United Kingdom</h4><p><span class="cn-main">Glasgow (HQ)</span>, London</p></div>
                     <div class="country-block"><h4>France</h4><p>Bordeaux, Angers, Anglet, Grenoble</p></div>
                     <div class="country-block"><h4>Benelux & DE</h4><p>Amsterdam, Antwerp, Leipzig</p></div>
                     <div class="country-block"><h4>Iberia & Med</h4><p>Calp, Porto, Monaco</p></div>
                 </div>
-                <p class="tr" data-en="CONNECTED EVERYWHERE IN EUROPE." data-fr="CONNECTÉS PARTOUT EN EUROPE." style="margin-top:20px; border-top: 1px solid #333; padding-top: 20px; font-weight: bold;">CONNECTED EVERYWHERE IN EUROPE.</p>
+                <p class="tr"  style="margin-top:20px; padding-top: 20px; font-weight: bold;">These locations are our technical sites; we operate throughout Europe.</p>
             </div>
         </div>
 
