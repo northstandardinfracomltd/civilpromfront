@@ -110,7 +110,7 @@
         
         .services-overlay-card {
             background: transparent; backdrop-filter: none; padding: 0px;
-            border-radius: 0px;  max-width: 770px;
+            border-radius: 0px;  max-width: 900px;
         }
         .services-overlay-card p { cursor: default; font-size: 30px;
     margin-bottom: 0px;
@@ -231,14 +231,12 @@ font-size: 26px;
         
         .city-group { opacity: 1 !important; visibility: visible !important; }
         .city-group circle.dot { fill: #a8f277 !important; stroke: none; transition: 0.3s; }
-        .city-group circle.pulse {
-            fill: none; stroke: #a8f277; stroke-width: 1.5;
-            animation: pulse-ring 2.5s infinite; opacity: 0;
+
+        .spatz {   
+            color: #a8f277 !important;
         }
-        @keyframes pulse-ring {
-            0% { r: 2.5; opacity: 0.6; }
-            100% { r: 15; opacity: 0; }
-        }
+
+
         .city-label {     fill: #ffffff;
     font-size: 18px;
     font-family: var(--text-main);
@@ -264,10 +262,25 @@ font-size: 26px;
         }
 
         .location-info { z-index: 5; }
-        .location-info h2 { font-family: 'CivilpromTitleRICH', sans-serif; font-size: 3rem; margin-bottom: 30px;  }
+        .location-info h2 {     font-family: 'CivilpromTitleRICH', sans-serif;
+    font-size: 69px;
+    margin-bottom: 30px;
+    font-weight: 500;
+    cursor: default;  }
         .location-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .country-block h4 { font-size: 0.7rem; color: #555; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
-        .country-block p { font-size: 0.9rem; color: #ccc; line-height: 1.5; }
+        .country-block h4 { font-size: 18px;
+    font-weight: 800 !important;
+    color: #a8f277;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+cursor: default;
+}
+        .country-block p {     font-size: 22px;
+    font-weight: 100;
+    cursor: default;
+    color: #ffffff;
+    line-height: 1.5;}
         .cn-main { font-weight: bold; color: #fff; border-bottom: 1px solid white; }
 
         footer {
@@ -280,9 +293,21 @@ font-size: 26px;
     font-size: 0.8rem;
     color: #1a0a2f;
     z-index: 10;
+    margin-top: 80px;
+    margin-bottom: -70px;
         }
-        .footer-contacts a { color: #888; text-decoration: none; margin-left: 20px; transition: 0.3s; }
-        .footer-contacts a:hover { color: #fff; }
+        .footer-contacts a { color: #1a0a2f;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0s;
+}
+        .footer-contacts a:hover {  text-decoration: underline;}
+
+       .footer-copy { color: #1a0a2f;   font-size: 18px;  font-weight: 900; }
+
 
         @media (max-width: 1024px) {
             header { padding: 20px; }
@@ -311,7 +336,7 @@ font-size: 26px;
         <div class="hero-content">
             <h1 class="tr" data-en="CLD" data-fr="CLD">CLD</h1>
             <div class="services-overlay-card">
-                <p class="tr">Civilprom Live Division (CLD) is an agile production house specializing in the capture, diffusion, and global distribution of high-tier content. From spontaneous shoots to long-term seasonal installations and roadshows, we provide flexible expert solutions. For inquiries contact <a href="mailto:cld@civilprom.com">cld@civilprom.com</a>.</p>
+                <p class="tr">Civilprom Live Division (CLD) is an agile production house specializing in the capture, diffusion, and global distribution of high-tier content. From spontaneous shoots to long-term seasonal installations and roadshows, we provide flexible expert solutions. For inquiries contact <a href="mailto:cld@civilprom.com" class="spatz">cld@civilprom.com</a>.</p>
             </div>
         </div>
     </section>
@@ -369,7 +394,7 @@ font-size: 26px;
             <div class="location-info">
                 <h2 class="tr" >12 Sites</h2>
                 <div class="location-grid">
-                    <div class="country-block"><h4>United Kingdom</h4><p><span class="cn-main">Glasgow (HQ)</span>, London</p></div>
+                    <div class="country-block"><h4>United Kingdom</h4><p><span>Glasgow</span>, London</p></div>
                     <div class="country-block"><h4>France</h4><p>Bordeaux, Angers, Anglet, Grenoble</p></div>
                     <div class="country-block"><h4>Benelux & DE</h4><p>Amsterdam, Antwerp, Leipzig</p></div>
                     <div class="country-block"><h4>Iberia & Med</h4><p>Calp, Porto, Monaco</p></div>
