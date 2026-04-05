@@ -10,6 +10,11 @@
         /* FONTS */
         @font-face { font-family: 'CivilpromMain'; src: url('https://civilprom.s3.eu-north-1.amazonaws.com/Civilprom1.otf'); }
         @font-face { font-family: 'CivilpromTitle'; src: url('https://civilprom.s3.eu-north-1.amazonaws.com/Civilprom2.otf'); }
+            @font-face {
+      font-family: 'CivilpromTitleRICH';
+          font-weight: 100 !important;
+      src: url('https://civilprom.s3.eu-north-1.amazonaws.com/Civilprom3.otf') format('opentype');
+    }
 
         :root {
             --accent: #ffffff;
@@ -85,9 +90,9 @@
 
         /* HERO & SERVICES */
         .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-        .overlay { position: absolute; inset: 0; background: linear-gradient(130deg, #34155c, #adff779c); z-index: 0; }
+        .overlay { position: absolute; inset: 0; background: #1a0a2f; z-index: 0; }
         .hero-content { position: relative; z-index: 10; padding: 0 10%; max-width: 1200px; }
-        h1 { font-family: var(--text-title);
+        h1 { font-family: 'CivilpromTitleRICH', sans-serif;
     font-size: 130px;
     line-height: 0.9;
     font-weight: 900;
@@ -108,7 +113,7 @@
         .spec-grid {border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: grid; grid-template-columns: repeat(3, 1fr); height: 100%; }
         .spec-item { display: flex; flex-direction: column; justify-content: flex-end; padding: 60px; border-right: 1px solid rgba(255,255,255,0.05); transition: 0.5s ease; position: relative; }
         .spec-item:hover { background: rgba(255,255,255,0.03); }
-        .spec-item h2 { font-family: var(--text-title); font-size: 64px; margin-bottom: 15px; }
+        .spec-item h2 { font-family: 'CivilpromTitleRICH', sans-serif; font-size: 64px; margin-bottom: 15px; }
         .spec-item p { color: #ffffff;
     font-size: 22px;
     max-width: 300px;
@@ -116,7 +121,7 @@
 
         /* EQUIPMENT & STAFF */
         .scroll-container { padding: 120px 10% 60px; overflow-y: auto; height: 100%; background: #1a0a2f; }
-        .scroll-container h2 { font-family: var(--text-title); font-size: 3rem; margin-bottom: 10px; }
+        .scroll-container h2 { font-family: 'CivilpromTitleRICH', sans-serif; font-size: 3rem; margin-bottom: 10px; }
         .equip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .equip-card {     background: #150826;
     border: 1px solid #261835;
@@ -131,7 +136,7 @@
         .equip-card-body { padding: 20px; }
         .equip-card h4 { 
 
-                font-family: var(--text-title);
+                font-family: 'CivilpromTitleRICH', sans-serif;
     font-size: 22Px;
     margin-bottom: 15px;
     margin-top: 5px;
@@ -228,7 +233,7 @@
         }
 
         .location-info { z-index: 5; }
-        .location-info h2 { font-family: var(--text-title); font-size: 3rem; margin-bottom: 30px;  }
+        .location-info h2 { font-family: 'CivilpromTitleRICH', sans-serif; font-size: 3rem; margin-bottom: 30px;  }
         .location-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         .country-block h4 { font-size: 0.7rem; color: #555; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
         .country-block p { font-size: 0.9rem; color: #ccc; line-height: 1.5; }
@@ -282,7 +287,7 @@
 
     <section>
         <div class="spec-grid">
-            <div class="spec-item" style="background: linear-gradient(to top, #1a0a2f, #1a0a2fc2), url('https://civilprom.s3.eu-north-1.amazonaws.com/sport.png') center/cover;">
+            <div class="spec-item" style="background: linear-gradient(to top, #350770, #350770b3), url('https://civilprom.s3.eu-north-1.amazonaws.com/sport.png') center/cover;">
                 <h2 class="tr" >Sport</h2>
                 <p class="tr" data-en="Live sporting events, tournaments and high-speed motion capture." data-fr="Rencontres sportives, tournois et captation de mouvement haute vitesse.">Live sporting events, tournaments and high-speed motion capture.</p>
             </div>
