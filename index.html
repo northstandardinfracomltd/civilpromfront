@@ -265,22 +265,40 @@ position: absolute;
 </head>
 <body>
 <script>
-    (function() {
-    // 1. Détection de Safari (exclut Chrome/Edge sur macOS)
+(function() {
+    // 
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
     if (isSafari) {
-        // Attendre que le DOM soit chargé
-        window.addEventListener('DOMContentLoaded', () => {
-            const allElements = document.querySelectorAll('*');
-            
-            allElements.forEach(el => {
-                // On récupère le style calculé pour vérifier le font-weight actuel
-                if (window.getComputedStyle(el).fontWeight === "600") {
-                    el.style.fontWeight = "500";
-                }
+        // 1. 
+        const style = document.createElement('style');
+        style.textContent = `
+            .srv-gelule, 
+            .card-txt p, 
+            .btn-mixboard, 
+            .tag-name, 
+            .card-action {
+                font-weight: 500 !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 2. 
+        const forceWeight = () => {
+            const selectors = ['.srv-gelule', '.card-txt p', '.btn-mixboard', '.tag-name', '.card-action'];
+            selectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.style.setProperty('font-weight', '500', 'important');
+                });
             });
-        });
+        };
+
+        // 
+        window.addEventListener('DOMContentLoaded', forceWeight);
+        window.addEventListener('load', forceWeight);
+        
+        //
+        setTimeout(forceWeight, 1500);
     }
 })();
 
